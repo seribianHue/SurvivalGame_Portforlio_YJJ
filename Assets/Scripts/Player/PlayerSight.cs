@@ -1,22 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     [SerializeField]
     LayerMask _layer;
 
     RaycastHit _hit;
 
+    Vector3 _screenCenter;
+
+
+    void Start()
+    {
+        _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
+        //Debug.DrawRay()
+
+
         Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
 
         if(Physics.Raycast(transform.position, transform.forward, out _hit, 4, _layer))
