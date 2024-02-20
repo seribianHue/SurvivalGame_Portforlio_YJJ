@@ -21,15 +21,20 @@ public class PlayerSight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
+/*        Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
         //Debug.DrawRay()
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
 
+        if(Physics.Raycast(ray, out _hit))
+        {
+            //Debug.Log(_hit.transform.name);
+        }*/
 
         Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
 
         if(Physics.Raycast(transform.position, transform.forward, out _hit, 4, _layer))
         {
-            //Debug.Log(_hit.transform.name);
+            Debug.Log(_hit.transform.name);
         }
     }
     private void OnTriggerEnter(Collider other)
