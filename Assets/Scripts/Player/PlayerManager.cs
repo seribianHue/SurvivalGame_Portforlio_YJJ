@@ -18,7 +18,14 @@ public class PlayerManager : MonoBehaviour
 
     GameObject _hitObj;
 
+    PlayerItem _playerItem;
+
     //char[] _trimChar = new char[] { '(', 'c', 'l', 'o', 'n', 'e', ')', };
+
+    private void Awake()
+    {
+        _playerItem = GetComponent<PlayerItem>();
+    }
 
     void Start()
     {
@@ -27,6 +34,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+
         Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
         //Debug.DrawRay()
         Debug.DrawRay(ray.origin, ray.direction * 6, Color.yellow);
@@ -44,7 +52,9 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            if(_hitObj != null)
+            //UIManager.Instance.SetAimSmall();
+
+            if (_hitObj != null)
             {
                 UIManager.Instance.SetAimSmall();
             }
@@ -66,35 +76,33 @@ public class PlayerManager : MonoBehaviour
             if(_hitObj != null)
             {
                 //pick
-                Debug.Log("Picked " + _hitObj.name);
-                Destroy(_hitObj);
+                if (_hitObj.GetComponent<ItemData>() != null)
+                {
+                    _playerItem.AddList(_hitObj.GetComponent<ItemData>()._item);
+                    Debug.Log("Picked " + _hitObj.name);
+                    Destroy(_hitObj);
 
+                    _hitObj = null;
+                    UIManager.Instance.SetAimSmall();
 
+                }
             }   
         }
     }
 
     void Attack(int dam)
     {
-        if(_hitObj == _atkRange._atkObj)
+        if(_hitObj == _atkRange._atkObj && _hitObj != null)
         {
             if (_hitObj.GetComponent<Resource>() != null)
             {
                 _hitObj.GetComponent<Resource>().OnAttacked(dam);
             }
-        }
-
-/*        foreach(GameObject obj in _atkRange._objList)
-        {
-            if(obj != null)
+            else if(_hitObj.GetComponent<Monster>() != null)
             {
-                if(obj.GetComponent<Resource>() != null)
-                    obj.GetComponent<Resource>().OnAttacked(dam);
+                _hitObj.GetComponent<Monster>().OnAttacked(dam);
             }
-
-        }*/
-
-
+        }
     }
 
     void SetUIItem()
@@ -103,7 +111,12 @@ public class PlayerManager : MonoBehaviour
         {
             int startIndex = _hitObj.name.IndexOf("(");
 
-            UIManager.Instance.SetItemName(_hitObj.name.Remove(startIndex, 7));
+            if (startIndex > -1)
+                UIManager.Instance.SetItemName(_hitObj.name.Remove(startIndex, 7));
+            else
+                UIManager.Instance.SetItemName(_hitObj.name);
+
+
             if (_hitObj.CompareTag("Item"))
             {
                 UIManager.Instance.SetItemExplainText("Press F to Pick Up");

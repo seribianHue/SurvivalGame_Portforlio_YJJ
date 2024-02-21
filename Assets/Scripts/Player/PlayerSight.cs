@@ -12,6 +12,8 @@ public class PlayerSight : MonoBehaviour
 
     Vector3 _screenCenter;
 
+    [SerializeField]
+    PlayerItem _playerItem;
 
     void Start()
     {
@@ -41,11 +43,16 @@ public class PlayerSight : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Item"))
         {
+
             Debug.Log(other.gameObject.name);
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //아이템 줍기
+                if(other.gameObject.GetComponent<ItemData>() != null)
+                {
+                    _playerItem.AddList(other.gameObject.GetComponent<ItemData>()._item);
+                }
 
                 Destroy(other.gameObject);
             }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemBase
 {
-    //public int _id;
     public Item _item;
     public int _count;
 
@@ -12,8 +11,6 @@ public class ItemBase
 
     public ItemBase(Item item)
     {
-        //_id = id;
-        //_item = (Item)id;
         _item = item;
         if(_count == 0)
         {

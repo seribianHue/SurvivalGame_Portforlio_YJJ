@@ -8,6 +8,9 @@ public class PlayerItem : MonoBehaviour
 
     List<int> _curEmptyIndex = new List<int>();
 
+    [SerializeField]
+    ItemUIManager _itemUIManager;
+
     private void Start()
     {
         for(int i = 0; i < _myItemArray.Length; i++)
@@ -18,12 +21,26 @@ public class PlayerItem : MonoBehaviour
 
     public void AddList(Item item)
     {
-        foreach(ItemBase myItem in _myItemArray)
+        for(int i = 0; i < _myItemArray.Length; ++i)
         {
-            if(myItem == null) continue;
+            if(_myItemArray[i] != null)
+            {
+                if(_myItemArray[i]._item == item)
+                {
+                    if (_myItemArray[i]._count >= 99)
+                    {
+
+                    }
+                    _myItemArray[i].AddUp();
+                    _itemUIManager.UpdateItemList(i, _myItemArray[i]._count);
+                    return;
+                }
+            }
             else
             {
-
+                _myItemArray[i] = new ItemBase(item);
+                _itemUIManager.AddItemList(i, item);
+                return;
             }
         }
     }
