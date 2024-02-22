@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3130147901351416870}
   m_Layer: 9
   m_Name: Grass
-  m_TagString: Atackable
+  m_TagString: Attackable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
     }
 
@@ -43,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         {
             if(_hitObj == null)
             {
-                UIManager.Instance.SetAimBig();
+                UIManager.Instance._aimUI.SetAimBig();
             }
             Debug.Log(_hit.transform.name);
             _hitObj = _hit.transform.gameObject;
@@ -56,7 +58,7 @@ public class PlayerManager : MonoBehaviour
 
             if (_hitObj != null)
             {
-                UIManager.Instance.SetAimSmall();
+                UIManager.Instance._aimUI.SetAimSmall();
             }
             _hitObj = null;
             SetUIItem();
@@ -83,7 +85,7 @@ public class PlayerManager : MonoBehaviour
                     Destroy(_hitObj);
 
                     _hitObj = null;
-                    UIManager.Instance.SetAimSmall();
+                    UIManager.Instance._aimUI.SetAimSmall();
 
                 }
             }   
@@ -112,24 +114,24 @@ public class PlayerManager : MonoBehaviour
             int startIndex = _hitObj.name.IndexOf("(");
 
             if (startIndex > -1)
-                UIManager.Instance.SetItemName(_hitObj.name.Remove(startIndex, 7));
+                UIManager.Instance._aimUI.SetItemName(_hitObj.name.Remove(startIndex, 7));
             else
-                UIManager.Instance.SetItemName(_hitObj.name);
+                UIManager.Instance._aimUI.SetItemName(_hitObj.name);
 
 
             if (_hitObj.CompareTag("Item"))
             {
-                UIManager.Instance.SetItemExplainText("Press F to Pick Up");
+                UIManager.Instance._aimUI.SetItemExplainText("Press F to Pick Up");
             }
             else
             {
-                UIManager.Instance.SetItemExplainText("Click to Attack\nDamage : " + _damage.ToString());
+                UIManager.Instance._aimUI.SetItemExplainText("Click to Attack\nDamage : " + _damage.ToString());
             }
         }
         else
         {
-            UIManager.Instance.SetItemName("");
-            UIManager.Instance.SetItemExplainText("");
+            UIManager.Instance._aimUI.SetItemName("");
+            UIManager.Instance._aimUI.SetItemExplainText("");
         }
     }
 

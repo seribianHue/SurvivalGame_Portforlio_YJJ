@@ -8,9 +8,6 @@ public class PlayerItem : MonoBehaviour
 
     List<int> _curEmptyIndex = new List<int>();
 
-    [SerializeField]
-    ItemUIManager _itemUIManager;
-
     private void Start()
     {
         for(int i = 0; i < _myItemArray.Length; i++)
@@ -32,14 +29,14 @@ public class PlayerItem : MonoBehaviour
 
                     }
                     _myItemArray[i].AddUp();
-                    _itemUIManager.UpdateItemList(i, _myItemArray[i]._count);
+                    UIManager.Instance._itemListUI.UpdateItemList(i, _myItemArray[i]._count);
                     return;
                 }
             }
             else
             {
                 _myItemArray[i] = new ItemBase(item);
-                _itemUIManager.AddItemList(i, item);
+                UIManager.Instance._itemListUI.AddItemList(i, item);
                 return;
             }
         }

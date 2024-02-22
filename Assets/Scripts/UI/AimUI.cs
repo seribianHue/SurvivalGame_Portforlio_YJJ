@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class AimUI : MonoBehaviour
 {
-    static UIManager instance;
-    public static UIManager Instance { get { return instance; } }
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     #region Aim
 
     [Header("Aim"), SerializeField]
     RectTransform _aimCircle;
-    Vector2 _circleSizeBig = new Vector2(20, 20);
+    Vector2 _circleSizeBig = new Vector2(40, 40);
     Vector2 _circleSizeSmall = new Vector2(0, 0);
 
     bool _bigger;
@@ -50,7 +42,7 @@ public class UIManager : MonoBehaviour
         }
         yield return null;
     }
-    
+
     IEnumerator CRT_SetAimSizeSmall()
     {
         float curTime = 0f;
@@ -65,7 +57,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    #region ItemText
+    #region ItemExplainText
 
     [Header("Item"), SerializeField]
     TextMeshProUGUI _itemNameTMP;

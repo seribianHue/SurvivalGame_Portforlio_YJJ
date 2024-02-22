@@ -7,22 +7,56 @@ public class ChickenManager : MonoBehaviour, Monster
     [SerializeField]
     float _moveSpeed = 2f;
 
+    [SerializeField]
+    int _atkDamage = 5;
+
     Vector3 _curDestination;
+
+    GameObject _player;
+
+    Animator _anim;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponent<Animator>();
+        _player = GameObject.FindWithTag("Player");
         SetRandomDestination();
-        _hp = 100;
+        _hp = 50;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * _moveSpeed * Time.deltaTime;
-        if(Vector3.Distance(transform.position, _curDestination) < 1)
+        if (_isAttacked)
         {
-            SetRandomDestination();
+            OnFollowPlayer();
+            if(Vector3.Distance(transform.position, _curDestination) < 1.5f)
+            {
+                OnAttack();
+            }
+            else
+            {
+                transform.position += transform.forward * _moveSpeed * Time.deltaTime;
+
+            }
+        }
+        else
+        {
+            transform.position += transform.forward * _moveSpeed * Time.deltaTime;
+            if(Vector3.Distance(transform.position, _curDestination) < 1)
+            {
+                SetRandomDestination();
+            }
+        }
+
+        if(_hp < 0)
+        {
+            //drop item
+
+            //destory
+            Destroy(gameObject);
         }
     }
 
@@ -63,5 +97,39 @@ public class ChickenManager : MonoBehaviour, Monster
         _hp -= dam;
         _isAttacked = true;
     }
+
+    public void OnFollowPlayer()
+    {
+        _curDestination = _player.transform.position;
+
+        transform.LookAt( _curDestination );
+    }
+
+    float _lastAttackTime;
+    public float _atkFrequan = 5f;
+
+    public void OnAttack()
+    {
+        if(Time.time - _lastAttackTime > _atkFrequan)
+        {
+            //Attack
+            StartCoroutine(CRT_attack());
+
+            _lastAttackTime = Time.time;
+        }
+    }
+
+    IEnumerator CRT_attack()
+    {
+        _player.GetComponent<PlayerInfo>().OnAttacked(_atkDamage);
+        _anim.SetBool("Walk", false);
+        _anim.SetBool("Eat", true);
+        yield return new WaitForSeconds(1);
+        _anim.SetBool("Eat", false);
+        _anim.SetBool("Walk", true);
+        yield return null;
+    }
+
+    
 
 }

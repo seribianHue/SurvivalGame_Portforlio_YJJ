@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 476212895931768755}
   m_Layer: 9
   m_Name: Tree
-  m_TagString: Atackable
+  m_TagString: Attackable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
