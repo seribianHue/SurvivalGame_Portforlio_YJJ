@@ -1,0 +1,5 @@
+ID,game_name,game_name_KOR,Name,Category,Type,Note
+0,Log,나무,item_resource_log_01,RESOURCE,BURNABLE,Tree's Bone
+1,Stone,돌,item_resource_stone_01,RESOURCE,NONBURNABLE,HARD
+2,Gold,금,item_resource_gold_01,RESOURCE,NONBURNABLE,Shiningggg
+3,Bush,마른풀,item_resource_bush_01,RESOURCE,BURNABLE,Like cotten candy!

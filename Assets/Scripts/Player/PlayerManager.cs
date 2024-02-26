@@ -36,6 +36,14 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
         //Debug.DrawRay()
@@ -80,7 +88,7 @@ public class PlayerManager : MonoBehaviour
                 //pick
                 if (_hitObj.GetComponent<ItemData>() != null)
                 {
-                    _playerItem.AddList(_hitObj.GetComponent<ItemData>()._item);
+                    _playerItem.AddList(_hitObj.GetComponent<ItemData>()._selfInfo, 1);
                     Debug.Log("Picked " + _hitObj.name);
                     Destroy(_hitObj);
 

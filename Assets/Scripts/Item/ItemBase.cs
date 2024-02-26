@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ItemBase
 {
-    public Item _item;
+    public ItemListTot.Item _item;
     public int _count;
 
-    public Item FindItemWithId(int id) { return (Item)id; }
+    //public Item FindItemWithId(int id) { return (Item)id; }
 
-    public ItemBase(Item item)
+    public ItemBase(ItemListTot.Item item)
     {
         _item = item;
         if(_count == 0)
@@ -18,8 +18,13 @@ public class ItemBase
         }
     }
 
-    public void AddUp()
+    public void AddUp(int count)
     {
-        _count++;
+        _count += count;
+    }
+
+    public void RemoveDown(int count)
+    {
+        _count -= count;
     }
 }

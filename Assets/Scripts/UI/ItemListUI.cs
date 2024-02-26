@@ -7,40 +7,17 @@ using UnityEngine.UI;
 
 public class ItemListUI : MonoBehaviour
 {
-    [Header("Sprites")]
-    [SerializeField]
-    Sprite[] _itemResorcesSprites;
-    [SerializeField]
-    Sprite[] _itemToolsSprites;
-    [SerializeField]
-    Sprite[] _itemArmorsSprites;
-    [SerializeField]
-    Sprite[] _itemBuildingsSprites;
-    [SerializeField]
-    Sprite[] _itemFoodsSprites;
-    [SerializeField]
-    List<Sprite[]> _itemSprites = new List<Sprite[]>();
-
-    private void Awake()
-    {
-        _itemSprites.Add(_itemResorcesSprites);
-        _itemSprites.Add(_itemToolsSprites);
-        _itemSprites.Add(_itemArmorsSprites);
-        _itemSprites.Add(_itemBuildingsSprites);
-        _itemSprites.Add(_itemFoodsSprites);
-    }
-
     [Header("Item UI")]
     [SerializeField]
     GameObject[] _itemUIArray;
 
-    public void AddItemList(int index, Item item)
+    public void AddItemListSprite(int index, Sprite itemSprite, int count)
     {
         if (_itemUIArray[index] == null)
         {
         }
-        _itemUIArray[index].GetComponent<Image>().sprite = FindSprite(item);
-        _itemUIArray[index].GetComponentInChildren<TextMeshProUGUI>().text = 1.ToString();
+        _itemUIArray[index].GetComponent<Image>().sprite = itemSprite;
+        _itemUIArray[index].GetComponentInChildren<TextMeshProUGUI>().text = count.ToString();
     }
 
     public void UpdateItemList(int index, int count)
@@ -48,10 +25,9 @@ public class ItemListUI : MonoBehaviour
         _itemUIArray[index].GetComponentInChildren<TextMeshProUGUI>().text = count.ToString();
     }
 
-    Sprite FindSprite(Item item)
+    public void RemoveItemList(int index)
     {
-        int typeIndex = (int)item / 100;
-        int itemIndex = (int)item % 100;
-        return _itemSprites[typeIndex][itemIndex];
+        _itemUIArray[index].GetComponent<Image>().sprite = null;
+        _itemUIArray[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 }
