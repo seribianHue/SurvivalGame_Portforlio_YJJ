@@ -30,4 +30,40 @@ public class PlayerInfo : MonoBehaviour
         _mental = _maxMental;
     }
 
+    private void Update()
+    {
+        GetHungry();
+        GetMentalLoss();
+    }
+
+    float _hungryTime = 3;
+    float _curTimeHunger = 0;
+    void GetHungry()
+    {
+        _curTimeHunger += Time.deltaTime;
+        if(_curTimeHunger > _hungryTime)
+        {
+            _curTimeHunger = 0;
+            _hunger--;
+            UIManager.Instance._playerInfoUI.SetHungerSprite((float)_hunger / (float)_maxHunger);
+
+        }
+    }
+
+    float _mentalLossTime = 2;
+    float _curTimeMental = 0;
+    void GetMentalLoss()
+    {
+        if (GameManager.Instance._IsMentalLoss)
+        {
+            _curTimeMental += Time.deltaTime;
+            if(_curTimeMental > _mentalLossTime)
+            {
+                _curTimeMental = 0;
+                _mental--;
+                UIManager.Instance._playerInfoUI.SetMentalSprite((float)_mental / (float)_maxMental);
+            }
+        }
+    }
+
 }

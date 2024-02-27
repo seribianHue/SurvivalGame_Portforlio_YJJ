@@ -20,8 +20,6 @@ public class PlayerManager : MonoBehaviour
 
     PlayerItem _playerItem;
 
-    //char[] _trimChar = new char[] { '(', 'c', 'l', 'o', 'n', 'e', ')', };
-
     private void Awake()
     {
         _playerItem = GetComponent<PlayerItem>();
@@ -36,15 +34,19 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        #region Mouse Lock Unlock
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             Cursor.lockState = CursorLockMode.Confined;
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            UIManager.Instance._craftUI.SetScrollOff();
             Cursor.lockState = CursorLockMode.Locked;
         }
+        #endregion
 
+        #region Ray ObjectIndicate
         Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
         //Debug.DrawRay()
         Debug.DrawRay(ray.origin, ray.direction * 6, Color.yellow);
@@ -71,7 +73,9 @@ public class PlayerManager : MonoBehaviour
             _hitObj = null;
             SetUIItem();
         }
+        #endregion
 
+        #region Attack
         if (Input.GetMouseButton(0))
         {
             if(Time.time - _lastAttackTime > _atkFrequan)
@@ -80,7 +84,9 @@ public class PlayerManager : MonoBehaviour
                 _lastAttackTime = Time.time;
             }
         }
+        #endregion
 
+        #region Pick Item
         if (Input.GetKeyDown(KeyCode.F))
         {
             if(_hitObj != null)
@@ -98,6 +104,7 @@ public class PlayerManager : MonoBehaviour
                 }
             }   
         }
+        #endregion
     }
 
     void Attack(int dam)

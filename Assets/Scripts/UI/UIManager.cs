@@ -22,4 +22,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     public PlayerInfoUI _playerInfoUI;
 
+    [SerializeField]
+    public CraftUI _craftUI;
+
+    [SerializeField]
+    public TimeUI _timeUI;
+
 }

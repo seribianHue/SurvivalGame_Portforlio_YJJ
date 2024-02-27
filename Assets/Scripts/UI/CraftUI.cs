@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class CraftUI : MonoBehaviour
 {
@@ -58,7 +59,11 @@ public class CraftUI : MonoBehaviour
                         {
                             mat2OK = true;
                         }
+                        else Debug.Log("Not Enough Item!");
+
                     }
+                    else Debug.Log("Item Cannot Found!");
+
                 }
                 else
                 {
@@ -74,7 +79,10 @@ public class CraftUI : MonoBehaviour
                         {
                             mat3OK = true;
                         }
+                        else Debug.Log("Not Enough Item!");
                     }
+                    else Debug.Log("Item Cannot Found!");
+
                 }
                 else
                 {
@@ -90,5 +98,47 @@ public class CraftUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    [Header("Craft Scroll Btn")]
+    [SerializeField]
+    GameObject _toolCraftScroll;
+    public void BTNToolCraft()
+    {
+        SetScrollOff();
+        _toolCraftScroll.SetActive(true);
+    }
+
+    [SerializeField]
+    GameObject _ArmorCraftScroll;
+    public void BTNArmorCraft()
+    {
+        SetScrollOff();
+        _ArmorCraftScroll.SetActive(true);
+    }
+
+    [SerializeField]
+    GameObject _BuildingsCraftScroll;
+    public void BTNBuildingsCraft()
+    {
+        SetScrollOff();
+        _BuildingsCraftScroll.SetActive(true);
+    }
+
+    [SerializeField]
+    GameObject _FoodCraftScroll;
+    public void BTNFoodCraft()
+    {
+        SetScrollOff();
+        _FoodCraftScroll.SetActive(true);
+    }
+
+    public void SetScrollOff()
+    {
+        _toolCraftScroll.SetActive(false);
+        _ArmorCraftScroll.SetActive(false);
+        _BuildingsCraftScroll.SetActive(false);
+        _FoodCraftScroll.SetActive(false);
+
     }
 }

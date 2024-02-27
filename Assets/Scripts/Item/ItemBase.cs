@@ -9,13 +9,10 @@ public class ItemBase
 
     //public Item FindItemWithId(int id) { return (Item)id; }
 
-    public ItemBase(ItemListTot.Item item)
+    public ItemBase(ItemListTot.Item item, int count)
     {
         _item = item;
-        if(_count == 0)
-        {
-            _count = 1;
-        }
+        _count = count;
     }
 
     public void AddUp(int count)
