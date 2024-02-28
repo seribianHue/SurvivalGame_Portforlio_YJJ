@@ -14,6 +14,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Head"), SerializeField]
     GameObject _headGObj;
 
+    Animator _anim;
+
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -27,8 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
         bool isMove = moveInput.magnitude != 0;
 
-        if (isMove)
+        if (isMove && !_anim.GetBool("Attack"))
         {
+            _anim.SetBool("Walk", true);
             Vector3 lookForward = new Vector3(_camArmTrf.forward.x, 0f, _camArmTrf.forward.z).normalized;
             Vector3 lookRight = new Vector3(_camArmTrf.right.x, 0f, _camArmTrf.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
@@ -36,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
             _playerTrf.forward = moveDir;
 
             transform.position += moveDir * Time.deltaTime * _moveSpeed;
+        }
+        else
+        {
+            _anim.SetBool("Walk", false);
         }
     }
 
@@ -57,4 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
         _camArmTrf.rotation = Quaternion.Euler(x, (camAngle.y + mouseDelta.x), camAngle.z);
     }
+
+    
 }

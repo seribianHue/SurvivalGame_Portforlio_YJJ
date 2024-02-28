@@ -20,15 +20,17 @@ public class PlayerManager : MonoBehaviour
 
     PlayerItem _playerItem;
 
+    Animator _anim;
+
     private void Awake()
     {
         _playerItem = GetComponent<PlayerItem>();
+        _anim = GetComponent<Animator>();
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-
         _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
     }
 
@@ -46,7 +48,7 @@ public class PlayerManager : MonoBehaviour
         }
         #endregion
 
-        #region Ray ObjectIndicate
+        #region Ray Object Indicate
         Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
         //Debug.DrawRay()
         Debug.DrawRay(ray.origin, ray.direction * 6, Color.yellow);
@@ -81,6 +83,9 @@ public class PlayerManager : MonoBehaviour
             if(Time.time - _lastAttackTime > _atkFrequan)
             {
                 Attack(_damage);
+                StartCoroutine(CRT_attack());
+                //_anim.SetBool("Attack", true);
+
                 _lastAttackTime = Time.time;
             }
         }
@@ -150,5 +155,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
+    IEnumerator CRT_attack()
+    {
+        _anim.SetBool("Walk", false);
+        _anim.SetBool("Attack", true);
+        yield return new WaitForSeconds(1.5f);
+        _anim.SetBool("Attack", false);
+        //_anim.SetBool("Walk", true);
+        yield return null;
+    }
 }

@@ -121,15 +121,20 @@ public class ChickenManager : MonoBehaviour, Monster
 
     IEnumerator CRT_attack()
     {
-        _player.GetComponent<PlayerInfo>().OnAttacked(_atkDamage);
         _anim.SetBool("Walk", false);
         _anim.SetBool("Eat", true);
-        yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(0.5f);
+        if(Vector3.Distance(transform.position, _player.transform.position) < 1.5f)
+        {
+            _player.GetComponent<PlayerInfo>().OnAttacked(_atkDamage);
+        }
+        yield return new WaitForSeconds(0.5f);
+
         _anim.SetBool("Eat", false);
         _anim.SetBool("Walk", true);
         yield return null;
     }
 
-    
 
 }
