@@ -146,7 +146,7 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    ItemBase[] _equipList = new ItemBase[3];
+    public ItemBase[] _equipList = new ItemBase[3];
 
     [SerializeField]
     ToolPrefabs _toolPrefabs;
