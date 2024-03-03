@@ -51,6 +51,11 @@ public class MapManager : MonoBehaviour
                         SetRock(X, Y, _plainResorcesList);
                     }
                 }
+                for(int i = 0; i < 100; ++i)
+                {
+                    SetRandomGrass(_plainResorcesList);
+
+                }
                 break;
 
             case eREGION.eMountain:
@@ -73,7 +78,14 @@ public class MapManager : MonoBehaviour
                     {
                         SetRock(X, Y, _snowResourcesList);
                     }
+
                 }
+                for (int i = 0; i < 50; ++i)
+                {
+                    SetRandomGrass(_snowResourcesList);
+
+                }
+
                 break;
 
             case eREGION.eForest:
@@ -88,7 +100,14 @@ public class MapManager : MonoBehaviour
                     {
                         SetRock(X, Y, _forestResorcesList);
                     }
+
                 }
+                for (int i = 0; i < 50; ++i)
+                {
+                    SetRandomGrass(_forestResorcesList);
+
+                }
+
                 break;
         }
 
@@ -172,6 +191,64 @@ public class MapManager : MonoBehaviour
             resourceList.Add(ranPos);
             X = ranPos[0]; Y = ranPos[1];
             return;
+        }
+    }
+
+    [SerializeField]
+    GameObject[] _grassPrefabs;
+    [SerializeField]
+    GameObject[] _lightingGrassPrefabs;
+
+    void SetRandomGrass(List<int[]> region)
+    {
+        float X = Random.Range(0, _curMapRadius);
+        float Y = Random.Range(0, _curMapRadius);
+
+        GameObject grass;
+        if(CommMath.Instance.ProbabilityMethod(5))
+        {
+            grass = Instantiate(_lightingGrassPrefabs[Random.Range(0, _lightingGrassPrefabs.Length)]);
+        }
+        else
+        {
+            grass = Instantiate(_grassPrefabs[Random.Range(0, _grassPrefabs.Length)]);
+        }
+
+        grass.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        float scale = Random.Range(0.7f, 1.8f);
+        grass.transform.localScale = new Vector3(scale, scale, scale);
+
+        if (region == _plainResorcesList)
+        {
+            grass.transform.position = new Vector3(X, 0, -Y);
+            grass.GetComponentInChildren<Renderer>().material = _materials[0];
+
+        }
+        else if (region == _forestResorcesList)
+        {
+            grass.transform.position = new Vector3(-X, 0, Y);
+            grass.GetComponentInChildren<Renderer>().material = _materials[3];
+
+        }
+        else if (region == _snowResourcesList)
+        {
+            grass.transform.position = new Vector3(X, 0, Y);
+            //이건 안된다
+            //grass.GetComponent<Renderer>().materials[0] = _materials[2];
+
+            //material중에 2,3번째 이상 것을 바꾸고 싶을때 이렇게 해야한다
+/*            Material[] mat = grass.GetComponent<Renderer>().materials;
+            mat[0] = _materials[2];
+            grass.GetComponent<Renderer>().materials = mat;*/
+
+            grass.GetComponentInChildren<Renderer>().material = _materials[2];
+
+        }
+        else
+        {
+            grass.transform.position = new Vector3(-X, 0, -Y);
+            grass.GetComponentInChildren<Renderer>().material = _materials[0];
+
         }
     }
 }

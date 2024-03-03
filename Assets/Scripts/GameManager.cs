@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         _gameTime += Time.deltaTime;
         if (_gameTime > _timeDay) _gameTime = 0;
 
-        float angleX = _initLightAngle.x - _gameTime * 5;
+        float angleX = _initLightAngle.x - _gameTime;
 
 
         _light.transform.localEulerAngles = new Vector3(
