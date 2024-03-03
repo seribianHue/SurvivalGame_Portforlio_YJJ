@@ -31,11 +31,23 @@ public class GameManager : MonoBehaviour
         _gameTime += Time.deltaTime;
         if (_gameTime > _timeDay) _gameTime = 0;
 
-        float angleX = _initLightAngle.x - _gameTime;
+        float angleX = _initLightAngle.x - _gameTime * 5;
 
 
         _light.transform.localEulerAngles = new Vector3(
             angleX, _initLightAngle.y, _initLightAngle.z);
+
+        Debug.Log(_light.transform.localEulerAngles);
+
+        if(_light.transform.localEulerAngles.x < 359 && _light.transform.localEulerAngles.x > 179)
+        {
+            _light.GetComponent<Light>().enabled = false;
+        }
+        else
+        {
+            _light.GetComponent<Light>().enabled = true;
+        }
+
         UIManager.Instance._timeUI.SetTimeArrow(angleX);
 
         SetMentalLoss();

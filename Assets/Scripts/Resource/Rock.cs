@@ -81,4 +81,12 @@ public class Rock : MonoBehaviour, Resource
             Obj.transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 90), 0));
         }
     }
+
+    [SerializeField]
+    GameObject[] _rockLooks;
+    public void SetRockLooks()
+    {
+        int index = Random.Range(0, _rockLooks.Length);
+        _rockLooks[index].SetActive(true);
+    }
 }

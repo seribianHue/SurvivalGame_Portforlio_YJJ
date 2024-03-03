@@ -49,4 +49,13 @@ public class Tree : MonoBehaviour, Resource
         }
     }
 
+    [SerializeField]
+    GameObject[] _treeObjs;
+
+    public void ChangeTreeLook(int index)
+    {
+        _treeObjs[index-1].SetActive(true);
+    }
+
+
 }

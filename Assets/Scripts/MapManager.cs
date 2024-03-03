@@ -37,26 +37,18 @@ public class MapManager : MonoBehaviour
             case eREGION.ePlain:
                 for(int i = 0; i < 20; ++i)
                 {
-                    int X, Y;
+                    int X = 0, Y = 0;
                     if (CommMath.Instance.ProbabilityMethod(20))
                     {
-                        GetResourcePos(_curMapRadius, _plainResorcesList, out X, out Y);
-                        GameObject treeObj = Instantiate(_tree);
-                        treeObj.transform.position = new Vector3(X, 0, -Y);
-                        treeObj.GetComponent<Renderer>().material = _materials[0];
+                        SetTree(X, Y, _plainResorcesList, 1);
                     }
                     else if (CommMath.Instance.ProbabilityMethod(80))
                     {
-                        GetResourcePos(_curMapRadius, _plainResorcesList, out X, out Y);
-                        GameObject grassObj = Instantiate(_grass);
-                        grassObj.transform.position = new Vector3(X, 0, -Y);
-                        grassObj.GetComponent<Renderer>().material = _materials[0];
+                        SetGrass(X, Y);
                     }
                     else
                     {
-                        GetResourcePos(_curMapRadius, _plainResorcesList, out X, out Y);
-                        GameObject rockObj = Instantiate(_rock);
-                        rockObj.transform.position = new Vector3(X, 0, -Y);
+                        SetRock(X, Y, _plainResorcesList);
                     }
                 }
                 break;
@@ -64,30 +56,22 @@ public class MapManager : MonoBehaviour
             case eREGION.eMountain:
                 for (int i = 0; i < 20; ++i)
                 {
-                    int X, Y;
-                    GetResourcePos(_curMapRadius, _mountainResourcesList, out X, out Y);
-                    GameObject rockObj = Instantiate(_rock);
-                    rockObj.transform.position = new Vector3(-X, 0, -Y);
+                    int X = 0, Y = 0;
+                    SetRock(X, Y, _mountainResourcesList);
                 }
                 break;
 
             case eREGION.eSnow:
                 for (int i = 0; i < 20; ++i)
                 {
-                    int X, Y;
+                    int X = 0, Y = 0;
                     if (CommMath.Instance.ProbabilityMethod(95))
                     {
-                        GetResourcePos(_curMapRadius, _snowResourcesList, out X, out Y);
-                        GameObject treeObj = Instantiate(_tree);
-                        treeObj.transform.position = new Vector3(X, 0, Y);
-                        treeObj.GetComponent<Renderer>().material = _materials[2];
-
+                        SetTree(X, Y, _snowResourcesList, 3);
                     }
                     else
                     {
-                        GetResourcePos(_curMapRadius, _snowResourcesList, out X, out Y);
-                        GameObject rockObj = Instantiate(_rock);
-                        rockObj.transform.position = new Vector3(X, 0, Y);
+                        SetRock(X, Y, _snowResourcesList);
                     }
                 }
                 break;
@@ -95,24 +79,64 @@ public class MapManager : MonoBehaviour
             case eREGION.eForest:
                 for (int i = 0; i < 20; ++i)
                 {
-                    int X, Y;
+                    int X = 0, Y = 0;
                     if (CommMath.Instance.ProbabilityMethod(95))
                     {
-                        GetResourcePos(_curMapRadius, _forestResorcesList, out X, out Y);
-                        GameObject treeObj = Instantiate(_tree);
-                        treeObj.transform.position = new Vector3(-X, 0, Y);
-                        treeObj.GetComponent<Renderer>().material = _materials[3];
+                        SetTree(X, Y, _forestResorcesList, 2);
                     }
                     else
                     {
-                        GetResourcePos(_curMapRadius, _forestResorcesList, out X, out Y);
-                        GameObject rockObj = Instantiate(_rock);
-                        rockObj.transform.position = new Vector3(-X, 0, Y);
+                        SetRock(X, Y, _forestResorcesList);
                     }
                 }
                 break;
         }
 
+    }
+
+    void SetTree(int X, int Y, List<int[]> region, int treeIndex)
+    {
+        GetResourcePos(_curMapRadius, region, out X, out Y);
+        GameObject treeObj = Instantiate(_tree);
+        
+        if(region == _plainResorcesList)
+            treeObj.transform.position = new Vector3(X, 0, -Y);
+        else if(region == _forestResorcesList)
+            treeObj.transform.position = new Vector3(-X, 0, Y);
+        else if(region == _snowResourcesList)
+            treeObj.transform.position = new Vector3(X, 0, Y);
+        else
+            treeObj.transform.position = new Vector3(-X, 0, -Y);
+
+
+        treeObj.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        float scale = Random.Range(0.7f, 1.5f);
+        treeObj.transform.localScale = new Vector3(scale, scale, scale);
+        treeObj.GetComponent<Tree>().ChangeTreeLook(treeIndex);
+    }
+    void SetRock(int X, int Y, List<int[]> region)
+    {
+        GetResourcePos(_curMapRadius, _forestResorcesList, out X, out Y);
+        GameObject rockObj = Instantiate(_rock);
+
+        if (region == _plainResorcesList)
+            rockObj.transform.position = new Vector3(X, 0, -Y);
+        else if (region == _forestResorcesList)
+            rockObj.transform.position = new Vector3(-X, 0, Y);
+        else if (region == _snowResourcesList)
+            rockObj.transform.position = new Vector3(X, 0, Y);
+        else
+            rockObj.transform.position = new Vector3(-X, 0, -Y);
+        
+        rockObj.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        rockObj.GetComponent<Rock>().SetRockLooks();
+    }
+    void SetGrass(int X, int Y)
+    {
+        GetResourcePos(_curMapRadius, _plainResorcesList, out X, out Y);
+        GameObject grassObj = Instantiate(_grass);
+        grassObj.transform.position = new Vector3(X, 0, -Y);
+        grassObj.GetComponent<Renderer>().material = _materials[0];
     }
 
     void GetResourcePos(int maxValule, List<int[]> resourceList, out int X, out int Y)
