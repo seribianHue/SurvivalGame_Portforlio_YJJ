@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     Animator _anim;
 
+    PlayerManager _playermanager;
+
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+        _playermanager = GetComponent<PlayerManager>();
     }
 
     private void Start()
@@ -28,27 +31,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        LookAround();
-
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        bool isMove = moveInput.magnitude != 0;
-
-        if (isMove && !_anim.GetBool("Attack"))
+        if (!PlayerManager.Instance._IsCraft)
         {
-            _anim.SetBool("Walk", true);
-            Vector3 lookForward = new Vector3(_camArmTrf.forward.x, 0f, _camArmTrf.forward.z).normalized;
-            Vector3 lookRight = new Vector3(_camArmTrf.right.x, 0f, _camArmTrf.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+            LookAround();
 
-            _playerTrf.forward = moveDir;
+            Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-            transform.position += moveDir * Time.deltaTime * _moveSpeed;
+            bool isMove = moveInput.magnitude != 0;
+
+            if (isMove && !_anim.GetBool("Attack"))
+            {
+                _anim.SetBool("Move", true);
+                Vector3 lookForward = new Vector3(_camArmTrf.forward.x, 0f, _camArmTrf.forward.z).normalized;
+                Vector3 lookRight = new Vector3(_camArmTrf.right.x, 0f, _camArmTrf.right.z).normalized;
+                Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
+                _playerTrf.forward = moveDir;
+
+                transform.position += moveDir * Time.deltaTime * _moveSpeed;
+            }
+            else
+            {
+                _anim.SetBool("Move", false);
+            }
         }
-        else
-        {
-            _anim.SetBool("Walk", false);
-        }
+
     }
 
     void LookAround()

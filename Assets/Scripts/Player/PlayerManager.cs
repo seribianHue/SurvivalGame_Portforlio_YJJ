@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    static PlayerManager instance;
+    public static PlayerManager Instance { get { return instance; } }
+
     [SerializeField] AttackRange _atkRange;
 
     [SerializeField] public float _atkFrequan = 2f;
@@ -22,8 +25,11 @@ public class PlayerManager : MonoBehaviour
 
     Animator _anim;
 
+    bool _isCraft;
+    public bool _IsCraft { get { return _isCraft; } }
     private void Awake()
     {
+        instance = this;
         _playerItem = GetComponent<PlayerItem>();
         _anim = GetComponent<Animator>();
     }
@@ -31,20 +37,30 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        _isCraft = false;
         _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
     }
 
     private void Update()
     {
         #region Mouse Lock Unlock
-        if (Input.GetKeyDown(KeyCode.Tab))
+
+        if(_isCraft == false)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                _isCraft = true;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else
         {
-            UIManager.Instance._craftUI.SetScrollOff();
-            Cursor.lockState = CursorLockMode.Locked;
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                UIManager.Instance._craftUI.SetScrollOff();
+                Cursor.lockState = CursorLockMode.Locked;
+                _isCraft = false;
+            }
         }
         #endregion
 
@@ -78,37 +94,45 @@ public class PlayerManager : MonoBehaviour
         #endregion
 
         #region Attack
-        if (Input.GetMouseButton(0))
+        if (!_isCraft)
         {
-            if(Time.time - _lastAttackTime > _atkFrequan)
+            if (Input.GetMouseButton(0))
             {
-                Attack(_damage);
-                StartCoroutine(CRT_attack());
-                //_anim.SetBool("Attack", true);
+                if(Time.time - _lastAttackTime > _atkFrequan)
+                {
+                    Attack(_damage);
+                    StartCoroutine(CRT_attack());
+                    //_anim.SetBool("Attack", true);
 
-                _lastAttackTime = Time.time;
+                    _lastAttackTime = Time.time;
+                }
             }
         }
+
         #endregion
 
         #region Pick Item
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!_isCraft)
         {
-            if(_hitObj != null)
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                //pick
-                if (_hitObj.GetComponent<ItemData>() != null)
+                if(_hitObj != null)
                 {
-                    _playerItem.AddList(_hitObj.GetComponent<ItemData>()._selfInfo, 1);
-                    Debug.Log("Picked " + _hitObj.name);
-                    Destroy(_hitObj);
+                    //pick
+                    if (_hitObj.GetComponent<ItemData>() != null)
+                    {
+                        _playerItem.AddList(_hitObj.GetComponent<ItemData>()._selfInfo, 1);
+                        Debug.Log("Picked " + _hitObj.name);
+                        Destroy(_hitObj);
 
-                    _hitObj = null;
-                    UIManager.Instance._aimUI.SetAimSmall();
+                        _hitObj = null;
+                        UIManager.Instance._aimUI.SetAimSmall();
 
-                }
-            }   
+                    }
+                }   
+            }
         }
+
         #endregion
     }
 
@@ -157,9 +181,9 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator CRT_attack()
     {
-        _anim.SetBool("Walk", false);
+        _anim.SetBool("Move", false);
         _anim.SetBool("Attack", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         _anim.SetBool("Attack", false);
         //_anim.SetBool("Walk", true);
         yield return null;
