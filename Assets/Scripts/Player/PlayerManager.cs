@@ -50,6 +50,8 @@ public class PlayerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 Cursor.lockState = CursorLockMode.Confined;
+                _anim.SetBool("Move", false);
+                _anim.SetBool("Attack", false);
                 _isCraft = true;
             }
         }
@@ -146,7 +148,7 @@ public class PlayerManager : MonoBehaviour
             }
             else if(_hitObj.GetComponent<Monster>() != null)
             {
-                _hitObj.GetComponent<Monster>().OnAttacked(dam);
+                _hitObj.GetComponent<Monster>().OnAttacked(dam, gameObject);
             }
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChickenManager : MonoBehaviour, Monster
 {
@@ -17,13 +18,20 @@ public class ChickenManager : MonoBehaviour, Monster
     Animator _anim;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _anim = GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
+        _hpSlider = _monsterCanvas.GetComponentInChildren<Slider>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         SetRandomDestination();
         _hp = 50;
+        _hpSlider.maxValue = _hp;
+        _hpSlider.value = _hp;
     }
 
     // Update is called once per frame
@@ -51,7 +59,7 @@ public class ChickenManager : MonoBehaviour, Monster
             }
         }
 
-        if(_hp < 0)
+        if(_hp <= 0)
         {
             //drop item
 
@@ -91,10 +99,12 @@ public class ChickenManager : MonoBehaviour, Monster
     int _hp;
 
     public bool _isAttacked;
-
-    public void OnAttacked(int dam)
+    GameObject _targetPlayer;
+    public void OnAttacked(int dam, GameObject attacker)
     {
+        _targetPlayer = attacker;
         _hp -= dam;
+        SetHPSlider(_hp);
         _isAttacked = true;
     }
 
@@ -136,5 +146,18 @@ public class ChickenManager : MonoBehaviour, Monster
         yield return null;
     }
 
+    [SerializeField, Header("HP UI")]
+    RectTransform _monsterCanvas;
+    Slider _hpSlider;
+    
 
+    void SetHPSlider(int hp)
+    {
+        _hpSlider.value = hp;
+    }
+
+    private void FixedUpdate()
+    {
+        _monsterCanvas.rotation = Camera.main.transform.rotation;
+    }
 }

@@ -179,16 +179,24 @@ public class PlayerItem : MonoBehaviour
                         }
                         else if(_curItem._item._type == Type.ARMOR)
                         {
+                            if (_equipList[1] != null)
+                            {
+                                AddList(_equipList[1]._item, 1);
+                            }
                             _equipList[1] = _curItem;
                             RemoveItem(_curItem._item, 1);
-                            UIManager.Instance._itemListUI.SetToolSpot(_curItem._item._itemSprite);
+                            UIManager.Instance._itemListUI.SetArmorSpot(_curItem._item._itemSprite);
 
                         }
                         else if (_curItem._item._type == Type.HELMET)
                         {
+                            if (_equipList[2] != null)
+                            {
+                                AddList(_equipList[2]._item, 1);
+                            }
                             _equipList[2] = _curItem;
                             RemoveItem(_curItem._item, 1);
-                            UIManager.Instance._itemListUI.SetToolSpot(_curItem._item._itemSprite);
+                            UIManager.Instance._itemListUI.SetHelmetSpot(_curItem._item._itemSprite);
 
                         }
                     }

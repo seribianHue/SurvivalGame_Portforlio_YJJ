@@ -4,7 +4,7 @@ using UnityEngine;
 
 interface Monster
 {
-    public void OnAttacked(int dam);
+    public void OnAttacked(int dam, GameObject attacker);
 
     public void OnFollowPlayer();
 
