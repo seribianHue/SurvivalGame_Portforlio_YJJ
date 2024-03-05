@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4438307885075029738}
   - component: {fileID: 1336901766890129263}
   - component: {fileID: 104066215750373008}
-  - component: {fileID: 2878454691521136258}
+  - component: {fileID: -4675822339503808000}
+  - component: {fileID: 987919815312480143}
   m_Layer: 0
   m_Name: Polyart_Rock
   m_TagString: Untagged
@@ -100,13 +101,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.3865008, y: 1.9903375, z: 1.808518}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2878454691521136258
+--- !u!114 &-4675822339503808000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7307928163004907158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfebd5a34faa7d428ce482ec7674722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetPos: {x: 0, y: 0, z: 0}
+--- !u!54 &987919815312480143
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

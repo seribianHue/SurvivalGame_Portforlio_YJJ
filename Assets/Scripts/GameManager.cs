@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         _light.transform.localEulerAngles = new Vector3(
             angleX, _initLightAngle.y, _initLightAngle.z);
 
-        Debug.Log(_light.transform.localEulerAngles);
+        //Debug.Log(_light.transform.localEulerAngles);
 
         if(_light.transform.localEulerAngles.x < 359 && _light.transform.localEulerAngles.x > 179)
         {

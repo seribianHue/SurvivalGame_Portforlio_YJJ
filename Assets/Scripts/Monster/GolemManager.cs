@@ -24,11 +24,14 @@ public class GolemManager : MonoBehaviour, Monster
     RectTransform _monsterCanvas;
     Slider _hpSlider;
 
+    GolemAttackCollider _attackCollider;
+
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         _player = GameObject.FindWithTag("Player");
         _hpSlider = _monsterCanvas.GetComponentInChildren<Slider>();
+        _attackCollider = GetComponentInChildren<GolemAttackCollider>();
     }
     private void Start()
     {
@@ -98,7 +101,7 @@ public class GolemManager : MonoBehaviour, Monster
             //Malee Attack;
             _atkFrequan = 2f;
 
-            if(_attackRangePlayer != null)
+            if(_attackCollider._attackRangePlayer != null)
             {
                 StopFollowPlayer();
                 if (Time.time - _lastAttackTime > _atkFrequan)
@@ -110,16 +113,19 @@ public class GolemManager : MonoBehaviour, Monster
             }
             else
             {
-                OnFollowPlayer();
+                //if(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                    OnFollowPlayer();
             }
         }
         else if(_attack == 1)
         {
             //Range Attack
+            StopFollowPlayer();
             _atkFrequan = 5f;
             if(Time.time - _lastAttackTime > _atkFrequan)
             {
-                RangeAttack();
+                _anim.SetTrigger("RangeAttack");
+                StartCoroutine(CRT_RangeAttack());
                 _lastAttackTime = Time.time;
                 _attack = -1;
             }
@@ -139,9 +145,9 @@ public class GolemManager : MonoBehaviour, Monster
     IEnumerator CRT_MaleeAttack()
     {
         yield return new WaitForSeconds(1f);
-        if (_attackRangePlayer != null)
+        if (_attackCollider._attackRangePlayer != null)
         {
-            _attackRangePlayer.GetComponent<PlayerInfo>().OnAttacked(_atkDamage);
+            _attackCollider._attackRangePlayer.GetComponent<PlayerInfo>().OnAttacked(_atkDamage);
         }
         yield return null;
     }
@@ -153,33 +159,21 @@ public class GolemManager : MonoBehaviour, Monster
     void RangeAttack()
     {
         _anim.SetTrigger("RangeAttack");
-        GameObject Rock = Instantiate(_rock, _handTrnf);
-        StartCoroutine(CRT_RangeAttack(Rock));
+        StartCoroutine(CRT_RangeAttack());
     }
-    IEnumerator CRT_RangeAttack(GameObject rock)
+    IEnumerator CRT_RangeAttack()
     {
+        GameObject rock = Instantiate(_rock, _handTrnf);
         yield return new WaitForSeconds(2f);
-        rock.transform.SetParent(null);
-        rock.GetComponent<Rigidbody>().useGravity = true;
-        rock.GetComponent<Rigidbody>().
-            AddForce(Vector3.MoveTowards(rock.transform.position, _targetPlayer.transform.position, 100f) * 100);
+        if(rock != null)
+        {
+            rock.transform.SetParent(null);
+            //rock.GetComponent<ThrowRock>().AddForce(_targetPlayer.transform.position);
+            rock.GetComponent<Rigidbody>().useGravity = true;
+            rock.GetComponent<Rigidbody>().
+                AddForce(Vector3.MoveTowards(rock.transform.position, _player.transform.position, 100f) * 100);
+        }
         yield return null;
-    }
-
-    GameObject _attackRangePlayer;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _attackRangePlayer = other.gameObject;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject == _attackRangePlayer)
-        {
-            _attackRangePlayer = null;
-        }
     }
 
     void SetHPSlider(int hp)
@@ -190,5 +184,10 @@ public class GolemManager : MonoBehaviour, Monster
     void WalkToTarget(GameObject target)
     {
         transform.position += transform.forward * _moveSpeed * Time.deltaTime;
+    }
+
+    public void OnRangeAttackEnd()
+    {
+
     }
 }
