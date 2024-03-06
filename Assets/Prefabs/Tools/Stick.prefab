@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 630677080135299229}
   - component: {fileID: 7062460802844828450}
   - component: {fileID: 939199860395170152}
-  m_Layer: 0
+  - component: {fileID: 4448434287802574048}
+  m_Layer: 9
   m_Name: Stick
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,3 +108,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &4448434287802574048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064017582058994743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cfb30128569c40b223563b5330a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemList: {fileID: 0}
+  _selfInfo:
+    _name: 
+    _itemSprite: {fileID: 0}
+    _id: 0
+    _category: 0
+    _type: 0
+    _description: 
+    _itemPrefab: {fileID: 0}

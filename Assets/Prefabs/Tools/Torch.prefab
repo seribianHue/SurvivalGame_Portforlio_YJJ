@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4301656920345052027}
   - component: {fileID: 8137834863994744592}
   - component: {fileID: 8817485658721327894}
-  m_Layer: 0
+  - component: {fileID: 4588965732233465565}
+  m_Layer: 9
   m_Name: Torch
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +110,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &4588965732233465565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993843552228779501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cfb30128569c40b223563b5330a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemList: {fileID: 0}
+  _selfInfo:
+    _name: 
+    _itemSprite: {fileID: 0}
+    _id: 0
+    _category: 0
+    _type: 0
+    _description: 
+    _itemPrefab: {fileID: 0}
 --- !u!1 &2519965464302398014
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812525395570478552}
   - component: {fileID: 3425565168380634334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +237,7 @@ GameObject:
   - component: {fileID: 6024401620978057108}
   - component: {fileID: 7227684644313269068}
   - component: {fileID: 6377916950133227191}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

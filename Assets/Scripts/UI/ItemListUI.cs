@@ -62,4 +62,15 @@ public class ItemListUI : MonoBehaviour
     public void SetHelmetSpot(Sprite image) { _helmetSpot.sprite = image; }
     public void ReturnHelmetSpot() { _helmetSpot.sprite = _helmetSprite; }
 
+    [Header("Equip Item")]
+    [SerializeField] Image[] _equipSpot;
+    [SerializeField] Sprite[] _equipSprite;
+    public void SetEquipSpot(int index, Sprite image)
+    {
+        _equipSpot[index].sprite = image;
+    }
+    public void ReturnEquipSpot(int index)
+    {
+        _equipSpot[index].sprite = _equipSprite[index];
+    }
 }

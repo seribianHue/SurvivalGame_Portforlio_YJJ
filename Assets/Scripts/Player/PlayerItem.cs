@@ -28,7 +28,7 @@ public class PlayerItem : MonoBehaviour
         EquipUnequipItem();
     }
 
-    public void AddList(ItemListTot.Item item, int count)
+    public void AddList(Item item, int count)
     {
         for(int i = 0; i < _myItemArray.Length; ++i)
         {
@@ -54,7 +54,7 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
-    public void RemoveItem(ItemListTot.Item item, int count)
+    public void RemoveItem(Item item, int count)
     {
         if(item == null) return;
 
@@ -186,6 +186,7 @@ public class PlayerItem : MonoBehaviour
                             _equipList[1] = _curItem;
                             RemoveItem(_curItem._item, 1);
                             UIManager.Instance._itemListUI.SetArmorSpot(_curItem._item._itemSprite);
+                            WearArmor(_curItem._item._id % 200);
 
                         }
                         else if (_curItem._item._type == Type.HELMET)
@@ -197,6 +198,7 @@ public class PlayerItem : MonoBehaviour
                             _equipList[2] = _curItem;
                             RemoveItem(_curItem._item, 1);
                             UIManager.Instance._itemListUI.SetHelmetSpot(_curItem._item._itemSprite);
+                            WearArmor(_curItem._item._id % 200);
 
                         }
                     }
@@ -213,9 +215,27 @@ public class PlayerItem : MonoBehaviour
                 {
                     AddList(_equipList[_curIndex % 10]._item, 1);
                     _equipList[_curIndex % 10] = null;
+                    UIManager.Instance._itemListUI.ReturnEquipSpot(_curIndex % 10);
+                    ClearToolPos();
                 }
 
             }
+        }
+    }
+
+    [Header("Armor")]
+    [SerializeField] GameObject _underwear;
+    [SerializeField] GameObject[] _armorList;
+    void WearArmor(int index)
+    {
+        if (index > 2)
+        {
+            _underwear.SetActive(false);
+            _armorList[index].SetActive(true);
+        }
+        else
+        {
+            _armorList[index].SetActive(true);
         }
     }
 
@@ -228,6 +248,40 @@ public class PlayerItem : MonoBehaviour
         catch
         {
             Debug.Log("NoTools");
+        }
+    }
+
+    public void DropItem()
+    {
+        if (_equipList[0] != null)
+        {
+            Instantiate(_equipList[0]._item._itemPrefab, transform.forward.normalized * 1, Quaternion.identity);
+            _equipList[0] = null;
+            ClearToolPos();
+            UIManager.Instance._itemListUI.ReturnEquipSpot(0);
+
+        }
+        else if (_equipList[1] != null)
+        {
+            Instantiate(_equipList[1]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
+            _equipList[1] = null;
+            UIManager.Instance._itemListUI.ReturnEquipSpot(1);
+        }
+        else if (_equipList[2] != null)
+        {
+            Instantiate(_equipList[2]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
+            _equipList[2] = null;
+            UIManager.Instance._itemListUI.ReturnEquipSpot(2);
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, _myItemArray.Length);
+            while (_myItemArray[randomIndex] == null)
+            {
+                randomIndex = Random.Range(0, _myItemArray.Length);
+            }
+            Instantiate(_myItemArray[randomIndex]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
+            RemoveItem(_myItemArray[randomIndex]._item, 1);
         }
     }
 }

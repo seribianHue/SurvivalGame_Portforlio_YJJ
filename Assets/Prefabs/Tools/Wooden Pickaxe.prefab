@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1997024182840535133}
   - component: {fileID: 8221822889815137543}
   - component: {fileID: 6689992033315928648}
-  m_Layer: 0
+  - component: {fileID: 1978194948680301603}
+  m_Layer: 9
   m_Name: Wooden Pickaxe
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,3 +86,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1978194948680301603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5416552867560501765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cfb30128569c40b223563b5330a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemList: {fileID: 0}
+  _selfInfo:
+    _name: 
+    _itemSprite: {fileID: 0}
+    _id: 0
+    _category: 0
+    _type: 0
+    _description: 
+    _itemPrefab: {fileID: 0}

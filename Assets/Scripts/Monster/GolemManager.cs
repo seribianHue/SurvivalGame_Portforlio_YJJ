@@ -87,24 +87,34 @@ public class GolemManager : MonoBehaviour, Monster
     float _lastAttackTime;
     public float _atkFrequan;
     int _attack;
+
+
+    [SerializeField]
+    float _maleeAttackFreq = 2f;
+    [SerializeField]
+    float _rangeAttackFreq = 5f;
+    [SerializeField]
+    float _soundAttackFreq = 5f;
     public void OnAttack()
     {
         transform.LookAt(_curDestination);
 
         if (_attack == -1)
         {
-            _attack = Random.Range(0, 3);
+            if (_isAttackDone)
+            {
+                _attack = Random.Range(0, 3);
+                _isAttackDone = false;
+            }
         }
 
         if(_attack == 0)
         {
             //Malee Attack;
-            _atkFrequan = 2f;
-
             if(_attackCollider._attackRangePlayer != null)
             {
                 StopFollowPlayer();
-                if (Time.time - _lastAttackTime > _atkFrequan)
+                if (Time.time - _lastAttackTime > _maleeAttackFreq)
                 {
                     MaleeAttack();
                     _lastAttackTime = Time.time;
@@ -121,8 +131,7 @@ public class GolemManager : MonoBehaviour, Monster
         {
             //Range Attack
             StopFollowPlayer();
-            _atkFrequan = 5f;
-            if(Time.time - _lastAttackTime > _atkFrequan)
+            if(Time.time - _lastAttackTime > _rangeAttackFreq)
             {
                 _anim.SetTrigger("RangeAttack");
                 StartCoroutine(CRT_RangeAttack());
@@ -133,7 +142,22 @@ public class GolemManager : MonoBehaviour, Monster
         else
         {
             //Scream Attack
-            _attack = -1;
+            if (Vector3.Distance(transform.position, _targetPlayer.transform.position) < 5f)
+            {
+                StopFollowPlayer();
+                if (Time.time - _lastAttackTime > _soundAttackFreq)
+                {
+                    _anim.SetTrigger("SoundAttack");
+                    StartCoroutine(CRT_SoundAttack());
+                    _lastAttackTime = Time.time;
+                    _attack = -1;
+                }
+            }
+            else
+            {
+                OnFollowPlayer();
+            }
+            //_isAttackDone = true;
         }
     }
 
@@ -151,16 +175,10 @@ public class GolemManager : MonoBehaviour, Monster
         }
         yield return null;
     }
-
     [SerializeField, Header("Range Attack")]
     GameObject _rock;
     [SerializeField]
     Transform _handTrnf;
-    void RangeAttack()
-    {
-        _anim.SetTrigger("RangeAttack");
-        StartCoroutine(CRT_RangeAttack());
-    }
     IEnumerator CRT_RangeAttack()
     {
         GameObject rock = Instantiate(_rock, _handTrnf);
@@ -175,6 +193,19 @@ public class GolemManager : MonoBehaviour, Monster
         }
         yield return null;
     }
+    #region Sound Attack
+    IEnumerator CRT_SoundAttack()
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (Vector3.Distance(transform.position, _targetPlayer.transform.position) < 5f)
+        {
+            _targetPlayer.GetComponent<PlayerItem>().DropItem();
+        }
+        yield return null;
+    }
+
+
+    #endregion
 
     void SetHPSlider(int hp)
     {
@@ -190,4 +221,24 @@ public class GolemManager : MonoBehaviour, Monster
     {
 
     }
+
+    #region Animation
+    bool _isAttackDone;
+    public void EndMaleeAttack()
+    {
+        Debug.Log("maleeattack done");
+        _isAttackDone = true;
+    }
+
+    public void EndRangeAttack()
+    {
+        Debug.Log("RangeAttack done");
+        _isAttackDone = true;
+    }
+
+    public void EndSoundAttack()
+    {
+        _isAttackDone = true;
+    }
+    #endregion
 }

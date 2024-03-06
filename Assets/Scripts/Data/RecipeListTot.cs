@@ -8,19 +8,19 @@ public class RecipeListTot : MonoBehaviour
     [Serializable]
     public class Recipe
     {
-        public ItemListTot.Item _resultItem;
+        public Item _resultItem;
         public int _resultCount;
 
-        public ItemListTot.Item _mat1;
+        public Item _mat1;
         public int _mat1Count;
 
-        public ItemListTot.Item _mat2;
+        public Item _mat2;
         public int _mat2Count;
 
-        public ItemListTot.Item _mat3;
+        public Item _mat3;
         public int _mat3Count;
 
-        public Recipe(ItemListTot.Item resultItem, int resultCount, ItemListTot.Item mat1, int mat1Count, ItemListTot.Item mat2, int mat2Count, ItemListTot.Item mat3, int mat3Count)
+        public Recipe(Item resultItem, int resultCount, Item mat1, int mat1Count, Item mat2, int mat2Count, Item mat3, int mat3Count)
         {
             _resultItem = resultItem;
             _resultCount = resultCount;

@@ -8,7 +8,7 @@ public class ItemData : MonoBehaviour
     ItemListTot _itemList;
 
     [SerializeField]
-    public ItemListTot.Item _selfInfo;
+    public Item _selfInfo;
 
     private void Awake()
     {
