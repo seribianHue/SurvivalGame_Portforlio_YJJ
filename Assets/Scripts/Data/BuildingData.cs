@@ -11,12 +11,12 @@ public class BuildingData : MonoBehaviour
     public readonly long _sheetID = 1759990118;
 
     [SerializeField]
-    ItemSprite _itemSpriteArray;
+    ItemGameData _itemGameData;
 
     public string _data;
 
     ItemListTot _itemTot;
-    List<ItemListTot.Item> _itemListTot;
+    List<Item> _itemListTot;
     List<RecipeListTot.Recipe> _recipeListTot;
 
     public void SetData()
@@ -38,8 +38,8 @@ public class BuildingData : MonoBehaviour
             Type type = (Type)Enum.Parse(typeof(Type), Data[5]);
 
             _itemListTot.
-                Add(new ItemListTot.Item(
-                    _itemSpriteArray.itemSprites[i], Int32.Parse(Data[0]), Data[1], catagory, type, Data[15]));
+                Add(new Item(
+                    _itemGameData.itemSprites[i], Int32.Parse(Data[0]), Data[1], catagory, type, Data[15], _itemGameData.itemPrefabs[i]));
 
             _recipeListTot.
                 Add(new RecipeListTot.Recipe(

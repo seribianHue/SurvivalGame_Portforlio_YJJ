@@ -11,7 +11,7 @@ public class ResourceData : MonoBehaviour
     public readonly long _sheetID = 310232778;
 
     [SerializeField]
-    ItemSprite _itemSpriteArray;
+    ItemGameData _itemGameData;
 
     public string _data;
 
@@ -33,8 +33,8 @@ public class ResourceData : MonoBehaviour
             Type type = (Type)Enum.Parse(typeof(Type), itemData[5]);
             
             _itemTot._itemListTot.
-                Add(new ItemListTot.Item(
-                    _itemSpriteArray.itemSprites[i], Int32.Parse(itemData[0]), itemData[1], catagory, type, itemData[6]));
+                Add(new Item(
+                    _itemGameData.itemSprites[i], Int32.Parse(itemData[0]), itemData[1], catagory, type, itemData[6], _itemGameData.itemPrefabs[i]));
         }
 
     }
