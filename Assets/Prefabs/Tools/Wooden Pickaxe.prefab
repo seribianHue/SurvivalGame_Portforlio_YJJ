@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8221822889815137543}
   - component: {fileID: 6689992033315928648}
   - component: {fileID: 1978194948680301603}
+  - component: {fileID: -8740164687943983655}
   m_Layer: 9
   m_Name: Wooden Pickaxe
   m_TagString: Item
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5416552867560501765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,3 +108,26 @@ MonoBehaviour:
     _type: 0
     _description: 
     _itemPrefab: {fileID: 0}
+--- !u!136 &-8740164687943983655
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5416552867560501765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3581517
+  m_Height: 0.9398898
+  m_Direction: 1
+  m_Center: {x: -0.010856211, y: -0.040633246, z: -0.00018924847}

@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprites:
   - {fileID: 21300000, guid: 1601a45f9f368f040a3f318520a474b7, type: 3}
+  - {fileID: 21300000, guid: 24f865d83b4860940a6b9342ad0ce100, type: 3}
   itemPrefabs:
-  - {fileID: 3364946207339977762, guid: c6b4d8728a3952a4eb21f7ff43be7787, type: 3}
+  - {fileID: 2998897298232110400, guid: 069aad303137b344597e9b1deed8055f, type: 3}
+  - {fileID: 5579454053641159908, guid: 276bb8abd2bca9440bb5184de3343cd8, type: 3}

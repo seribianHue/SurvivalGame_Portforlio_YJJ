@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1229749697233248696}
   - component: {fileID: 1857851902515957536}
   - component: {fileID: -346156702241052541}
+  - component: {fileID: 7474872416310561122}
   m_Layer: 9
   m_Name: Stone Pickaxe
   m_TagString: Item
@@ -107,3 +108,26 @@ MonoBehaviour:
     _type: 0
     _description: 
     _itemPrefab: {fileID: 0}
+--- !u!136 &7474872416310561122
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319706075015889406}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3581517
+  m_Height: 0.9398898
+  m_Direction: 1
+  m_Center: {x: -0.010856211, y: -0.040633246, z: -0.00018924847}

@@ -26,6 +26,7 @@ public class PlayerItem : MonoBehaviour
     {
         SetCurItem();
         EquipUnequipItem();
+        BuildingConfirm();
     }
 
     public void AddList(Item item, int count)
@@ -146,10 +147,24 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    Transform _buildingTrnf;
+    public void BuildingConfirm()
+    {
+        if(_curItem != null)
+        {
+            if(_curItem._item._category == Category.BUILDING)
+            {
+                Instantiate(_curItem._item._itemPrefab, _buildingTrnf);
+            }
+        }
+
+    }
+
     public ItemBase[] _equipList = new ItemBase[3];
 
-    [SerializeField]
-    ToolPrefabs _toolPrefabs;
+/*    [SerializeField]
+    ToolPrefabs _toolPrefabs;*/
 
     [SerializeField]
     Transform _toolPos;
@@ -174,7 +189,7 @@ public class PlayerItem : MonoBehaviour
                             UIManager.Instance._itemListUI.SetToolSpot(_curItem._item._itemSprite);
 
                             ClearToolPos();
-                            Instantiate(_toolPrefabs.toolPrefabs[_curItem._item._id % 100], _toolPos);
+                            Instantiate(_curItem._item._itemPrefab, _toolPos);
 
                         }
                         else if(_curItem._item._type == Type.ARMOR)

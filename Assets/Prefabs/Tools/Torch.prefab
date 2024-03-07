@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 993843552228779501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.21, z: 0}
   m_LocalScale: {x: 0.1, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -106,10 +106,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 2.9498165
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.000000074505806, y: 0.47490644, z: -0.00015165657}
 --- !u!114 &4588965732233465565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812525395570478552}
   - component: {fileID: 3425565168380634334}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 6024401620978057108}
   - component: {fileID: 7227684644313269068}
   - component: {fileID: 6377916950133227191}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -24,7 +24,7 @@ public class CraftUI : MonoBehaviour
     public void BTNCraft()
     {
         _itemName = EventSystem.current.currentSelectedGameObject.name;
-
+        Debug.Log(_itemName);
         bool mat1OK = false;
         bool mat2OK = false;
         bool mat3OK = false;
@@ -41,9 +41,9 @@ public class CraftUI : MonoBehaviour
                         {
                             mat1OK = true;
                         }
-                        else Debug.Log("Not Enough Item!");
+                        else Debug.Log("Not Enough Item 1!");
                     }
-                    else Debug.Log("Item Cannot Found!");
+                    else Debug.Log("Item Cannot Found 1!");
                 }
                 else
                 {
@@ -55,14 +55,14 @@ public class CraftUI : MonoBehaviour
                     int needCount = 0;
                     if (_playerItem.FindItemNCount(recipe._mat2._id, out needCount))
                     {
-                        if (needCount >= recipe._mat1Count)
+                        if (needCount >= recipe._mat2Count)
                         {
                             mat2OK = true;
                         }
-                        else Debug.Log("Not Enough Item!");
+                        else Debug.Log("Not Enough Item 2!");
 
                     }
-                    else Debug.Log("Item Cannot Found!");
+                    else Debug.Log("Item Cannot Found 2!");
 
                 }
                 else
@@ -75,13 +75,13 @@ public class CraftUI : MonoBehaviour
                     int needCount = 0;
                     if (_playerItem.FindItemNCount(recipe._mat3._id, out needCount))
                     {
-                        if (needCount >= recipe._mat1Count)
+                        if (needCount >= recipe._mat3Count)
                         {
                             mat3OK = true;
                         }
-                        else Debug.Log("Not Enough Item!");
+                        else Debug.Log("Not Enough Item 3!");
                     }
-                    else Debug.Log("Item Cannot Found!");
+                    else Debug.Log("Item Cannot Found 3!");
 
                 }
                 else

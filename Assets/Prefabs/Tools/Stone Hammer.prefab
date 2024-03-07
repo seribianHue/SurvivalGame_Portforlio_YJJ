@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3139012808174884275}
   - component: {fileID: 4301158437322345852}
   - component: {fileID: 6825577944092188024}
+  - component: {fileID: -1136875797055873131}
   m_Layer: 9
   m_Name: Stone Hammer
   m_TagString: Item
@@ -106,3 +107,26 @@ MonoBehaviour:
     _type: 0
     _description: 
     _itemPrefab: {fileID: 0}
+--- !u!136 &-1136875797055873131
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640163922144229895}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1052413
+  m_Height: 0.65639627
+  m_Direction: 1
+  m_Center: {x: 0.00011205673, y: 0.023743391, z: -0.00084066205}

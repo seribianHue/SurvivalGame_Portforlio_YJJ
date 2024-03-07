@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1107780060917953394}
   - component: {fileID: 5984275167662700675}
   - component: {fileID: 5804365296886492758}
+  - component: {fileID: -885738883412069996}
   m_Layer: 9
   m_Name: Stone Axe
   m_TagString: Item
@@ -107,3 +108,26 @@ MonoBehaviour:
     _type: 0
     _description: 
     _itemPrefab: {fileID: 0}
+--- !u!136 &-885738883412069996
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466107055129006297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14113227
+  m_Height: 0.62336516
+  m_Direction: 1
+  m_Center: {x: -0.066912964, y: 0.15968722, z: -0.0000040642917}
