@@ -16,7 +16,7 @@ public class ThrowRock : MonoBehaviour
         Debug.Log(other.gameObject.name + "µ¹");
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerInfo>().OnAttacked(50);
+            other.gameObject.GetComponent<PlayerInfo>().OnAttacked(30);
             Destroy(gameObject);
         }
     }

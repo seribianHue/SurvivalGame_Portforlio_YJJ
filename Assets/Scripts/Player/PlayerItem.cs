@@ -253,9 +253,11 @@ public class PlayerItem : MonoBehaviour
 
     public void DropItem()
     {
+        Debug.Log(transform.position);
         if (_equipList[0] != null)
         {
-            Instantiate(_equipList[0]._item._itemPrefab, transform.forward.normalized * 1, Quaternion.identity);
+            Instantiate(_equipList[0]._item._itemPrefab,
+                transform.position + transform.forward.normalized * 1, Quaternion.identity);
             _equipList[0] = null;
             ClearToolPos();
             UIManager.Instance._itemListUI.ReturnEquipSpot(0);
@@ -263,25 +265,37 @@ public class PlayerItem : MonoBehaviour
         }
         else if (_equipList[1] != null)
         {
-            Instantiate(_equipList[1]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
+            Instantiate(_equipList[1]._item._itemPrefab, 
+                transform.position + transform.forward.normalized * 1, Quaternion.identity);
             _equipList[1] = null;
             UIManager.Instance._itemListUI.ReturnEquipSpot(1);
         }
         else if (_equipList[2] != null)
         {
-            Instantiate(_equipList[2]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
+            Instantiate(_equipList[2]._item._itemPrefab, 
+                transform.position + transform.forward.normalized * 1, Quaternion.identity);
             _equipList[2] = null;
             UIManager.Instance._itemListUI.ReturnEquipSpot(2);
         }
         else
         {
-            int randomIndex = Random.Range(0, _myItemArray.Length);
-            while (_myItemArray[randomIndex] == null)
+            bool _isEmpty = true;
+            foreach(ItemBase item in _myItemArray)
             {
-                randomIndex = Random.Range(0, _myItemArray.Length);
+                if(item != null) _isEmpty = false;
             }
-            Instantiate(_myItemArray[randomIndex]._item._itemPrefab, transform.forward.normalized * 2, Quaternion.identity);
-            RemoveItem(_myItemArray[randomIndex]._item, 1);
+
+            if (!_isEmpty)
+            {
+                int randomIndex = Random.Range(0, _myItemArray.Length);
+                while (_myItemArray[randomIndex] == null)
+                {
+                    randomIndex = Random.Range(0, _myItemArray.Length);
+                }
+                Instantiate(_myItemArray[randomIndex]._item._itemPrefab, 
+                    transform.position + transform.forward.normalized * 1 + new Vector3(0, 1, 0), Quaternion.identity);
+                RemoveItem(_myItemArray[randomIndex]._item, 1);
+            }
         }
     }
 }
