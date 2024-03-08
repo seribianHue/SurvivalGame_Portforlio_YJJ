@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6328438916030372901}
   - component: {fileID: 6668699740541149420}
   m_Layer: 9
-  m_Name: Craft Table
+  m_Name: Crafting Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
