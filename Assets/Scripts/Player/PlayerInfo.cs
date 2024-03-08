@@ -50,6 +50,11 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
+    public void AddHunger(int eat)
+    {
+        _hunger += eat;
+    }
+
     float _mentalLossTime = 2;
     float _curTimeMental = 0;
     void GetMentalLoss()

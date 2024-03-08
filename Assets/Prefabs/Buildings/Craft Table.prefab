@@ -95,7 +95,9 @@ GameObject:
   - component: {fileID: 7543239041910603081}
   - component: {fileID: 5271522741496449810}
   - component: {fileID: 8017669117320448257}
-  m_Layer: 0
+  - component: {fileID: 6328438916030372901}
+  - component: {fileID: 6668699740541149420}
+  m_Layer: 9
   m_Name: Craft Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,6 +199,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8337965, y: 0.79801285, z: 0.78}
   m_Center: {x: 0.0047980845, y: 0.39900625, z: 0.00000028312206}
+--- !u!54 &6328438916030372901
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2998897298232110400}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6668699740541149420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2998897298232110400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cfb30128569c40b223563b5330a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemList: {fileID: 0}
+  _selfInfo:
+    _name: 
+    _itemSprite: {fileID: 0}
+    _id: 0
+    _category: 0
+    _type: 0
+    _description: 
+    _itemPrefab: {fileID: 0}
 --- !u!1 &3229145143949146912
 GameObject:
   m_ObjectHideFlags: 0

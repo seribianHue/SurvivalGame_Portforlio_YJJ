@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _logItem: {fileID: 4388559718905953031, guid: 34e469b89fcb22449bb5708e29f12ad6, type: 3}
   _seedItem: {fileID: 1399153087579323450, guid: 77aacb8a6482dd04ab024a4039843089, type: 3}
+  _appleItem: {fileID: 6136203424175769596, guid: 11a0407ba67adb84f8e7c58d84d37eb5, type: 3}
   _Hp: 100
   _treeObjs:
   - {fileID: 611196978990731015}

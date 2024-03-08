@@ -7,8 +7,13 @@ public class PlayerManager : MonoBehaviour
     static PlayerManager instance;
     public static PlayerManager Instance { get { return instance; } }
 
-    [SerializeField] AttackRange _atkRange;
+    [Header("Player Scripts")]
+    [SerializeField] public AttackRange _atkRange;
+    [SerializeField] public PlayerItem _playerItem;
+    [SerializeField] public PlayerInfo _playerInfo;
+    [SerializeField] public PlayerMovement _playerMovement;
 
+    [Header("Properties")]
     [SerializeField] public float _atkFrequan = 2f;
     [SerializeField] int _damage = 10;
 
@@ -21,7 +26,6 @@ public class PlayerManager : MonoBehaviour
 
     GameObject _hitObj;
 
-    PlayerItem _playerItem;
 
     Animator _anim;
 
@@ -136,7 +140,38 @@ public class PlayerManager : MonoBehaviour
         }
 
         #endregion
+
+        if(_hitObj != null)
+        {
+            if(_hitObj.GetComponent<ItemData>() != null)
+            {
+                if(_hitObj.GetComponent<ItemData>()._selfInfo._id == 300) 
+                {
+                    _isCraftTabel = true;
+                }
+                else if(_hitObj.GetComponent<ItemData>()._selfInfo._id == 301)
+                {
+                    _isBonFire = true;
+                }
+            }
+            else
+            {
+                _isCraftTabel = false;
+                _isBonFire = false;
+            }
+        }
+        else
+        {
+            _isCraftTabel = false;
+            _isBonFire = false;
+
+        }
+
+
     }
+
+    public bool _isBonFire;
+    public bool _isCraftTabel;
 
     void Attack(int dam)
     {

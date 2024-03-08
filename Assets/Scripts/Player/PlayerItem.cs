@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PlayerItem : MonoBehaviour
         }
         _curItem = _myItemArray[_curIndex];
         UIManager.Instance._itemListUI.SetPointerTrf(_curIndex);
-
+        _isFoodInstantiated = false;
     }
 
     private void Update()
@@ -27,13 +28,33 @@ public class PlayerItem : MonoBehaviour
         SetCurItem();
         EquipUnequipItem();
         BuildingConfirm();
+        FoodConfirm();
+
+        DropItem();
     }
 
     public void AddList(Item item, int count)
     {
-        for(int i = 0; i < _myItemArray.Length; ++i)
+        for(int j = 0; j < _myItemArray.Length; j++)
         {
-            if(_myItemArray[i] != null)
+            if (_myItemArray[j] != null)
+            {
+                if (_myItemArray[j]._item == item)
+                {
+                    if (_myItemArray[j]._count >= 99)
+                    {
+
+                    }
+                    _myItemArray[j].AddUp(count);
+                    UIManager.Instance._itemListUI.UpdateItemList(j, _myItemArray[j]._count);
+                    return;
+                }
+            }
+
+        }
+        for (int i = 0; i < _myItemArray.Length; ++i)
+        {
+/*            if(_myItemArray[i] != null)
             {
                 if(_myItemArray[i]._item == item)
                 {
@@ -51,7 +72,15 @@ public class PlayerItem : MonoBehaviour
                 _myItemArray[i] = new ItemBase(item, count);
                 UIManager.Instance._itemListUI.AddItemListSprite(i, item._itemSprite, count);
                 return;
+            }*/
+
+            if (_myItemArray[i] == null)
+            {
+                _myItemArray[i] = new ItemBase(item, count);
+                UIManager.Instance._itemListUI.AddItemListSprite(i, item._itemSprite, count);
+                return;
             }
+
         }
     }
 
@@ -149,22 +178,104 @@ public class PlayerItem : MonoBehaviour
 
     [SerializeField]
     Transform _buildingTrnf;
-    public void BuildingConfirm()
+    bool _isBuildingInstatiated;
+    GameObject _buildingINhand;
+    void BuildingConfirm()
     {
         if(_curItem != null)
         {
             if(_curItem._item._category == Category.BUILDING)
             {
-                Instantiate(_curItem._item._itemPrefab, _buildingTrnf);
+                
+                if (_isBuildingInstatiated == false)
+                {
+                    _buildingINhand = Instantiate(_curItem._item._itemPrefab, _buildingTrnf);
+                    _isBuildingInstatiated = true;
+                }
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _buildingINhand.transform.parent = null;
+                    _buildingINhand = null;
+                    RemoveItem(_curItem._item, 1);
+                    _isBuildingInstatiated = false;
+                }
+            }
+            else
+            {
+                if (_buildingINhand != null)
+                {
+                    Destroy(_buildingINhand);
+                    _buildingINhand = null;
+                    _isBuildingInstatiated = false;
+                }
+            }
+        }
+        else 
+        {
+            if(_buildingINhand != null)
+            {
+                Destroy(_buildingINhand);
+                _buildingINhand = null;
+                _isBuildingInstatiated = false;
             }
         }
 
     }
 
-    public ItemBase[] _equipList = new ItemBase[3];
+    bool _isFoodInstantiated;
+    GameObject _isFoodINhand;
+    void FoodConfirm()
+    {
+        if (_curItem != null)
+        {
+            if (_curItem._item._category == Category.FOOD)
+            {
 
-/*    [SerializeField]
-    ToolPrefabs _toolPrefabs;*/
+                if (_isFoodInstantiated == false)
+                {
+                    _isFoodINhand = Instantiate(_curItem._item._itemPrefab, _toolPos);
+                    if(_isFoodINhand.GetComponent<Rigidbody>() != null)
+                    {
+                        _isFoodINhand.GetComponent<Rigidbody>().isKinematic = true;
+                        _isFoodINhand.GetComponent<Collider>().isTrigger = true;
+                    }
+                    _isFoodInstantiated = true;
+                }
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    //eat
+                    PlayerManager.Instance._playerInfo.AddHunger(Int32.Parse(_curItem._item._description));
+                    RemoveItem(_curItem._item, 1);
+                    Destroy(_isFoodINhand);
+                    _isFoodINhand = null;
+                    _isFoodInstantiated = false;
+
+
+                }
+            }
+            else
+            {
+                if (_isFoodINhand != null)
+                {
+                    Destroy(_isFoodINhand);
+                    _isFoodINhand = null;
+                    _isFoodInstantiated = false;
+                }
+            }
+        }
+        else
+        {
+            if (_isFoodINhand != null)
+            {
+                Destroy(_isFoodINhand);
+                _isFoodINhand = null;
+                _isFoodInstantiated = false;
+            }
+        }
+    }
+
+
+    public ItemBase[] _equipList = new ItemBase[3];
 
     [SerializeField]
     Transform _toolPos;
@@ -268,6 +379,19 @@ public class PlayerItem : MonoBehaviour
 
     public void DropItem()
     {
+        if(_curItem != null)
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Instantiate(_curItem._item._itemPrefab,
+                    transform.position + transform.forward.normalized * 1 + new Vector3(0, 1, 0), Quaternion.identity);
+                RemoveItem(_curItem._item, 1);
+            }
+        }
+    }
+
+    public void DropItemByMonster()
+    {
         Debug.Log(transform.position);
         if (_equipList[0] != null)
         {
@@ -302,10 +426,10 @@ public class PlayerItem : MonoBehaviour
 
             if (!_isEmpty)
             {
-                int randomIndex = Random.Range(0, _myItemArray.Length);
+                int randomIndex = UnityEngine.Random.Range(0, _myItemArray.Length);
                 while (_myItemArray[randomIndex] == null)
                 {
-                    randomIndex = Random.Range(0, _myItemArray.Length);
+                    randomIndex = UnityEngine.Random.Range(0, _myItemArray.Length);
                 }
                 Instantiate(_myItemArray[randomIndex]._item._itemPrefab, 
                     transform.position + transform.forward.normalized * 1 + new Vector3(0, 1, 0), Quaternion.identity);

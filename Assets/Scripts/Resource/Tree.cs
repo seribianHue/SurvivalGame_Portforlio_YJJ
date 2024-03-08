@@ -7,6 +7,7 @@ public class Tree : MonoBehaviour, Resource
     [Header("Drop Prefabs")]
     [SerializeField] GameObject _logItem;
     [SerializeField] GameObject _seedItem;
+    [SerializeField] GameObject _appleItem;
 
     int _hp = 100;
 
@@ -20,8 +21,24 @@ public class Tree : MonoBehaviour, Resource
         _hp -= dam;
         _Hp = _hp;
         if(_hp <= 0) { OnDestroyed(); }
-        else if((_hp < 40) && !isLogDroped40) { DropItem(1, _logItem); isLogDroped40 = true; }
-        else if((_hp < 70) && !isLogDroped70) { DropItem(1, _logItem); isLogDroped70 = true; }
+        else if((_hp < 40) && !isLogDroped40) 
+        {
+            DropItem(1, _logItem);
+            if (CommMath.Instance.ProbabilityMethod(50))
+            {
+                DropItem(1, _appleItem);
+            }
+            isLogDroped40 = true; 
+        }
+        else if((_hp < 70) && !isLogDroped70) 
+        { 
+            DropItem(1, _logItem);
+            if (CommMath.Instance.ProbabilityMethod(50))
+            {
+                DropItem(1, _appleItem);
+            }
+            isLogDroped70 = true; 
+        }
         
     }
     
@@ -32,6 +49,12 @@ public class Tree : MonoBehaviour, Resource
 
         if(CommMath.Instance.ProbabilityMethod(50)) { DropItem(1, _seedItem); }
         else { DropItem(2, _seedItem); }
+
+        if (CommMath.Instance.ProbabilityMethod(50))
+        {
+            DropItem(1, _appleItem);
+        }
+        else { DropItem(2, _appleItem); }
 
         Destroy(gameObject);
     }

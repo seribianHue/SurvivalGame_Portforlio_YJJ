@@ -179,7 +179,6 @@ public class GolemManager : MonoBehaviour, Monster
         yield return null;
     }
     #endregion
-
     #region Range Attack
     [SerializeField, Header("Range Attack")]
     GameObject _rock;
@@ -206,7 +205,7 @@ public class GolemManager : MonoBehaviour, Monster
         yield return new WaitForSeconds(1.5f);
         if (Vector3.Distance(transform.position, _targetPlayer.transform.position) < 5f)
         {
-            _targetPlayer.GetComponent<PlayerItem>().DropItem();    
+            _targetPlayer.GetComponent<PlayerItem>().DropItemByMonster();    
         }
         yield return null;
     }
@@ -215,16 +214,6 @@ public class GolemManager : MonoBehaviour, Monster
     void SetHPSlider(int hp)
     {
         _hpSlider.value = hp;
-    }
-
-    void WalkToTarget(GameObject target)
-    {
-        transform.position += transform.forward * _moveSpeed * Time.deltaTime;
-    }
-
-    public void OnRangeAttackEnd()
-    {
-
     }
 
     #region Animation

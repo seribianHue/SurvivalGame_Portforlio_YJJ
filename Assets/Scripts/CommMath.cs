@@ -15,10 +15,10 @@ public class CommMath
         }
     }
 
-    public bool ProbabilityMethod(float percent)
+    public bool ProbabilityMethod(int percent)
     {
         int randomNum = Random.Range(0, 100);
-        if (randomNum < percent) { return true; }
+        if (randomNum <= percent) { return true; }
         else { return false; }
     }
 }

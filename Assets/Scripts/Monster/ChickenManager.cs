@@ -62,12 +62,43 @@ public class ChickenManager : MonoBehaviour, Monster
         if(_hp <= 0)
         {
             //drop item
-
+            DropItems();
             //destory
             Destroy(gameObject);
         }
     }
+    #region Death after
 
+    [SerializeField]
+    GameObject _meat;
+    void DropItems()
+    {
+        if (CommMath.Instance.ProbabilityMethod(33))
+        {
+            Instantiate(_meat, 
+                transform.position + new Vector3(Random.Range(0f, 1f), 1, Random.Range(0f, 1f)), 
+                Quaternion.Euler(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360))));
+            Instantiate(_meat,
+                transform.position + new Vector3(Random.Range(0f, 1f), 1, Random.Range(0f, 1f)),
+                Quaternion.Euler(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360))));
+        }
+        else
+        {
+            Instantiate(_meat,
+                transform.position + new Vector3(Random.Range(0f, 1f), 1, Random.Range(0f, 1f)),
+                Quaternion.Euler(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360))));
+            Instantiate(_meat,
+                transform.position + new Vector3(Random.Range(0f, 1f), 1, Random.Range(0f, 1f)),
+                Quaternion.Euler(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360))));
+            Instantiate(_meat,
+                transform.position + new Vector3(Random.Range(0f, 1f), 1, Random.Range(0f, 1f)),
+                Quaternion.Euler(new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360))));
+        }
+    }
+
+    #endregion
+
+    #region Get Attacked
     void SetRandomDestination()
     {
         _curDestination = transform.position 
@@ -114,7 +145,8 @@ public class ChickenManager : MonoBehaviour, Monster
 
         transform.LookAt( _curDestination );
     }
-
+    #endregion
+    #region Attack
     float _lastAttackTime;
     public float _atkFrequan = 5f;
 
@@ -149,8 +181,9 @@ public class ChickenManager : MonoBehaviour, Monster
     [SerializeField, Header("HP UI")]
     RectTransform _monsterCanvas;
     Slider _hpSlider;
-    
+    #endregion
 
+    #region HP Canvas
     void SetHPSlider(int hp)
     {
         _hpSlider.value = hp;
@@ -160,4 +193,5 @@ public class ChickenManager : MonoBehaviour, Monster
     {
         _monsterCanvas.rotation = Camera.main.transform.rotation;
     }
+    #endregion
 }

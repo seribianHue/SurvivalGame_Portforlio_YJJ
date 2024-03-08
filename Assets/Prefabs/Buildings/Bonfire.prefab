@@ -4855,8 +4855,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.95164245, b: 0.6556604, a: 1}
-  m_Intensity: 5
-  m_Range: 3
+  m_Intensity: 7
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4917,8 +4917,9 @@ GameObject:
   - component: {fileID: 3574375382955805578}
   - component: {fileID: 1353434589626446097}
   - component: {fileID: 97196622856383793}
-  m_Layer: 0
-  m_Name: CampFire
+  - component: {fileID: 1378790422116796921}
+  m_Layer: 9
+  m_Name: Bonfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5011,3 +5012,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0856155, y: 1.0329784, z: 0.86354613}
   m_Center: {x: 0.06976879, y: 0.509834, z: 0.016719997}
+--- !u!114 &1378790422116796921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579454053641159908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cfb30128569c40b223563b5330a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemList: {fileID: 0}
+  _selfInfo:
+    _name: 
+    _itemSprite: {fileID: 0}
+    _id: 0
+    _category: 0
+    _type: 0
+    _description: 
+    _itemPrefab: {fileID: 0}

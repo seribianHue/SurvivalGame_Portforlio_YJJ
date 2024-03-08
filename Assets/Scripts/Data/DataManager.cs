@@ -12,6 +12,8 @@ public class DataManager : MonoBehaviour
     ArmorData _armorData;
     [SerializeField]
     BuildingData _buildingData;
+    [SerializeField]
+    FoodData _foodData;
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class DataManager : MonoBehaviour
         _toolsData.SetData();
         _armorData.SetData();
         _buildingData.SetData();
+        _foodData.SetData();
     }
 
 }

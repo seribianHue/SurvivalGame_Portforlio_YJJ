@@ -100,6 +100,11 @@ public class CraftUI : MonoBehaviour
         }
     }
 
+    public void MakeFood()
+    {
+
+    }
+
     [Header("Craft Scroll Btn")]
     [SerializeField]
     GameObject _toolCraftScroll;
@@ -113,8 +118,11 @@ public class CraftUI : MonoBehaviour
     GameObject _ArmorCraftScroll;
     public void BTNArmorCraft()
     {
-        SetScrollOff();
-        _ArmorCraftScroll.SetActive(true);
+        if (PlayerManager.Instance._isCraftTabel)
+        {
+            SetScrollOff();
+            _ArmorCraftScroll.SetActive(true);
+        }
     }
 
     [SerializeField]
@@ -129,8 +137,11 @@ public class CraftUI : MonoBehaviour
     GameObject _FoodCraftScroll;
     public void BTNFoodCraft()
     {
-        SetScrollOff();
-        _FoodCraftScroll.SetActive(true);
+        if (PlayerManager.Instance._isBonFire)
+        {
+            SetScrollOff();
+            _FoodCraftScroll.SetActive(true);
+        }
     }
 
     public void SetScrollOff()

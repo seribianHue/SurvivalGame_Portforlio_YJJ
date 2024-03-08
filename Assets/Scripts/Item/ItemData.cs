@@ -29,6 +29,6 @@ public class ItemData : MonoBehaviour
                 _selfInfo = item;
                 break;
             }
-        }
+            }
     }
 }
