@@ -8,7 +8,7 @@ public class ItemData : MonoBehaviour
     ItemListTot _itemList;
 
     [SerializeField]
-    public Item _selfInfo;
+    public Item _item;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class ItemData : MonoBehaviour
         {
             if(item._name == name)
             {
-                _selfInfo = item;
+                _item = item;
                 break;
             }
             }

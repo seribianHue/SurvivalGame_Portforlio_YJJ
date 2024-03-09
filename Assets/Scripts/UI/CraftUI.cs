@@ -100,7 +100,12 @@ public class CraftUI : MonoBehaviour
                 }
             }
         }
-        curBTN.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+        //curBTN.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+        Button[] BTNs = curBTN.transform.parent.GetComponentsInChildren<Button>();
+        foreach (Button btns in BTNs)
+        {
+            btns.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+        }
     }
 
     public void MakeFood()

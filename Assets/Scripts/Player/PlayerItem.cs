@@ -20,7 +20,6 @@ public class PlayerItem : MonoBehaviour
         }
         _curItem = _myItemArray[_curIndex];
         UIManager.Instance._itemListUI.SetPointerTrf(_curIndex);
-        _isFoodInstantiated = false;
     }
 
     private void Update()
@@ -176,9 +175,9 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    #region Building Confirm
     [SerializeField]
     Transform _buildingTrnf;
-    bool _isBuildingInstatiated;
     GameObject _buildingINhand;
     void BuildingConfirm()
     {
@@ -187,17 +186,19 @@ public class PlayerItem : MonoBehaviour
             if(_curItem._item._category == Category.BUILDING)
             {
                 
-                if (_isBuildingInstatiated == false)
+                if ((_buildingINhand == null) || (_buildingINhand.GetComponent<ItemData>()._item._id != _curItem._item._id))
                 {
+                    if (_buildingINhand != null)
+                    {
+                        Destroy(_buildingINhand);
+                    }
                     _buildingINhand = Instantiate(_curItem._item._itemPrefab, _buildingTrnf);
-                    _isBuildingInstatiated = true;
                 }
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _buildingINhand.transform.parent = null;
                     _buildingINhand = null;
                     RemoveItem(_curItem._item, 1);
-                    _isBuildingInstatiated = false;
                 }
             }
             else
@@ -206,7 +207,6 @@ public class PlayerItem : MonoBehaviour
                 {
                     Destroy(_buildingINhand);
                     _buildingINhand = null;
-                    _isBuildingInstatiated = false;
                 }
             }
         }
@@ -216,13 +216,13 @@ public class PlayerItem : MonoBehaviour
             {
                 Destroy(_buildingINhand);
                 _buildingINhand = null;
-                _isBuildingInstatiated = false;
             }
         }
 
     }
+    #endregion
 
-    bool _isFoodInstantiated;
+    #region Food Confirm
     GameObject _isFoodINhand;
     void FoodConfirm()
     {
@@ -231,15 +231,18 @@ public class PlayerItem : MonoBehaviour
             if (_curItem._item._category == Category.FOOD)
             {
 
-                if (_isFoodInstantiated == false)
+                if ((_isFoodINhand == null) || (_isFoodINhand.GetComponent<ItemData>()._item._id != _curItem._item._id))
                 {
+                    if(_isFoodINhand != null)
+                    {
+                        Destroy(_isFoodINhand);
+                    }
                     _isFoodINhand = Instantiate(_curItem._item._itemPrefab, _toolPos);
                     if(_isFoodINhand.GetComponent<Rigidbody>() != null)
                     {
                         _isFoodINhand.GetComponent<Rigidbody>().isKinematic = true;
                         _isFoodINhand.GetComponent<Collider>().isTrigger = true;
                     }
-                    _isFoodInstantiated = true;
                 }
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -248,18 +251,15 @@ public class PlayerItem : MonoBehaviour
                     RemoveItem(_curItem._item, 1);
                     Destroy(_isFoodINhand);
                     _isFoodINhand = null;
-                    _isFoodInstantiated = false;
-
 
                 }
             }
             else
             {
-                if (_isFoodINhand != null)
+                if ((_isFoodINhand != null))
                 {
                     Destroy(_isFoodINhand);
                     _isFoodINhand = null;
-                    _isFoodInstantiated = false;
                 }
             }
         }
@@ -269,11 +269,10 @@ public class PlayerItem : MonoBehaviour
             {
                 Destroy(_isFoodINhand);
                 _isFoodINhand = null;
-                _isFoodInstantiated = false;
             }
         }
     }
-
+    #endregion
 
     public ItemBase[] _equipList = new ItemBase[3];
 

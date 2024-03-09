@@ -51,7 +51,7 @@ public class PlayerSight : MonoBehaviour
                 //아이템 줍기
                 if(other.gameObject.GetComponent<ItemData>() != null)
                 {
-                    _playerItem.AddList(other.gameObject.GetComponent<ItemData>()._selfInfo, 1);
+                    _playerItem.AddList(other.gameObject.GetComponent<ItemData>()._item, 1);
                 }
 
                 Destroy(other.gameObject);

@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!PlayerManager.Instance._IsCraft)
+        if (PlayerManager.Instance._IsCraft == false)
         {
             LookAround();
 

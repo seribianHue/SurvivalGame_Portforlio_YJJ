@@ -53,6 +53,7 @@ public class PlayerInfo : MonoBehaviour
     public void AddHunger(int eat)
     {
         _hunger += eat;
+        UIManager.Instance._playerInfoUI.SetHungerSprite((float)_hunger / (float)_maxHunger);
     }
 
     float _mentalLossTime = 2;

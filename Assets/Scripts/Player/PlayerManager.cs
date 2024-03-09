@@ -43,8 +43,11 @@ public class PlayerManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _isCraft = false;
         _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+        _isPause = false;
     }
 
+    bool _isPause = false;
+    bool _isGameEnd = false;
     private void Update()
     {
         #region Mouse Lock Unlock
@@ -127,7 +130,7 @@ public class PlayerManager : MonoBehaviour
                     //pick
                     if (_hitObj.GetComponent<ItemData>() != null)
                     {
-                        _playerItem.AddList(_hitObj.GetComponent<ItemData>()._selfInfo, 1);
+                        _playerItem.AddList(_hitObj.GetComponent<ItemData>()._item, 1);
                         Debug.Log("Picked " + _hitObj.name);
                         Destroy(_hitObj);
 
@@ -141,15 +144,16 @@ public class PlayerManager : MonoBehaviour
 
         #endregion
 
-        if(_hitObj != null)
+        #region Check Building
+        if (_hitObj != null)
         {
             if(_hitObj.GetComponent<ItemData>() != null)
             {
-                if(_hitObj.GetComponent<ItemData>()._selfInfo._id == 300) 
+                if(_hitObj.GetComponent<ItemData>()._item._id == 300) 
                 {
                     _isCraftTabel = true;
                 }
-                else if(_hitObj.GetComponent<ItemData>()._selfInfo._id == 301)
+                else if(_hitObj.GetComponent<ItemData>()._item._id == 301)
                 {
                     _isBonFire = true;
                 }
@@ -166,7 +170,32 @@ public class PlayerManager : MonoBehaviour
             _isBonFire = false;
 
         }
+        #endregion
 
+        /*        if (Input.GetKey(KeyCode.T))
+                {
+                    if(_isPause == false)
+                    {
+                        Time.timeScale = 0f;
+                        _isPause = true;
+                    }
+                    else
+                    {
+                        Time.timeScale = 1.0f;
+                        _isPause = false;
+                    }
+                }*/
+
+
+        if((_playerInfo._hp <= 0) && (_isGameEnd == false))
+        {
+            _isGameEnd = true;
+            //Time.timeScale = 0;
+            _isCraft = true;
+            _anim.SetTrigger("Death");
+            StartCoroutine(UIManager.Instance.BlackOut());
+
+        }
 
     }
 
