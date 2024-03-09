@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class CraftUI : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class CraftUI : MonoBehaviour
 
     public void BTNCraft()
     {
-        _itemName = EventSystem.current.currentSelectedGameObject.name;
+        GameObject curBTN = EventSystem.current.currentSelectedGameObject;
+        _itemName = curBTN.name;
         Debug.Log(_itemName);
         bool mat1OK = false;
         bool mat2OK = false;
@@ -98,6 +100,7 @@ public class CraftUI : MonoBehaviour
                 }
             }
         }
+        curBTN.GetComponent<CraftBTNControll>().CraftConfirmBTN();
     }
 
     public void MakeFood()
@@ -112,6 +115,12 @@ public class CraftUI : MonoBehaviour
     {
         SetScrollOff();
         _toolCraftScroll.SetActive(true);
+        Button[] BTNs = _toolCraftScroll.GetComponent<ScrollRect>().content.GetComponentsInChildren<Button>();
+        foreach(Button btns in BTNs)
+        {
+            btns.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+        }
+
     }
 
     [SerializeField]
@@ -122,6 +131,13 @@ public class CraftUI : MonoBehaviour
         {
             SetScrollOff();
             _ArmorCraftScroll.SetActive(true);
+            
+            Button[] BTNs = _ArmorCraftScroll.GetComponent<ScrollRect>().content.GetComponentsInChildren<Button>();
+            foreach (Button btns in BTNs)
+            {
+                btns.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+            }
+
         }
     }
 
@@ -131,6 +147,13 @@ public class CraftUI : MonoBehaviour
     {
         SetScrollOff();
         _BuildingsCraftScroll.SetActive(true);
+     
+        Button[] BTNs = _BuildingsCraftScroll.GetComponent<ScrollRect>().content.GetComponentsInChildren<Button>();
+        foreach (Button btns in BTNs)
+        {
+            btns.GetComponent<CraftBTNControll>().CraftConfirmBTN();
+        }
+
     }
 
     [SerializeField]
