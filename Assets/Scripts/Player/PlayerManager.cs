@@ -152,22 +152,31 @@ public class PlayerManager : MonoBehaviour
                 if(_hitObj.GetComponent<ItemData>()._item._id == 300) 
                 {
                     _isCraftTabel = true;
+                    UIManager.Instance._craftUI.SetArmorScrollBTN(true);
                 }
                 else if(_hitObj.GetComponent<ItemData>()._item._id == 301)
                 {
                     _isBonFire = true;
+                    UIManager.Instance._craftUI.SetFoodScrollBTN(true);
+
                 }
             }
             else
             {
                 _isCraftTabel = false;
                 _isBonFire = false;
+                UIManager.Instance._craftUI.SetArmorScrollBTN(false);
+                UIManager.Instance._craftUI.SetFoodScrollBTN(false);
+
             }
         }
         else
         {
             _isCraftTabel = false;
             _isBonFire = false;
+            UIManager.Instance._craftUI.SetArmorScrollBTN(false);
+            UIManager.Instance._craftUI.SetFoodScrollBTN(false);
+
 
         }
         #endregion
@@ -187,7 +196,7 @@ public class PlayerManager : MonoBehaviour
                 }*/
 
 
-        if((_playerInfo._hp <= 0) && (_isGameEnd == false))
+        if ((_playerInfo._hp <= 0) && (_isGameEnd == false))
         {
             _isGameEnd = true;
             //Time.timeScale = 0;

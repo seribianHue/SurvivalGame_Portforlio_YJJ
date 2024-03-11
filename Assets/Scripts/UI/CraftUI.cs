@@ -22,6 +22,19 @@ public class CraftUI : MonoBehaviour
         _playerItem = GameObject.Find("Player").GetComponent<PlayerItem>();
     }
 
+    [Header("Craft, Food BTN")]
+    [SerializeField] Button _armorBTN;
+    public void SetArmorScrollBTN(bool onoff)
+    {
+        _armorBTN.interactable = onoff;
+    }
+
+    [SerializeField] Button _foodBTN;
+    public void SetFoodScrollBTN(bool onoff)
+    {
+        _foodBTN.interactable = onoff;
+    }
+
     public void BTNCraft()
     {
         GameObject curBTN = EventSystem.current.currentSelectedGameObject;
@@ -106,11 +119,6 @@ public class CraftUI : MonoBehaviour
         {
             btns.GetComponent<CraftBTNControll>().CraftConfirmBTN();
         }
-    }
-
-    public void MakeFood()
-    {
-
     }
 
     [Header("Craft Scroll Btn")]
