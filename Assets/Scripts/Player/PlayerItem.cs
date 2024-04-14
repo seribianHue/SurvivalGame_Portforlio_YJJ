@@ -341,7 +341,11 @@ public class PlayerItem : MonoBehaviour
                     AddList(_equipList[_curIndex % 10]._item, 1);
                     _equipList[_curIndex % 10] = null;
                     UIManager.Instance._itemListUI.ReturnEquipSpot(_curIndex % 10);
-                    ClearToolPos();
+
+                    if (_curIndex % 10 == 0)
+                        ClearToolPos();
+                    else if (_curIndex % 10 == 1)
+                        UnWearArmor();
                 }
 
             }
@@ -362,6 +366,15 @@ public class PlayerItem : MonoBehaviour
         {
             _armorList[index].SetActive(true);
         }
+    }
+
+    void UnWearArmor()
+    {
+        foreach(var armor in  _armorList)
+        {
+            armor.SetActive(false);
+        }
+        _underwear.SetActive(true);
     }
 
     void ClearToolPos()
@@ -406,6 +419,7 @@ public class PlayerItem : MonoBehaviour
             Instantiate(_equipList[1]._item._itemPrefab, 
                 transform.position + transform.forward.normalized * 1, Quaternion.identity);
             _equipList[1] = null;
+            UnWearArmor();
             UIManager.Instance._itemListUI.ReturnEquipSpot(1);
         }
         else if (_equipList[2] != null)
