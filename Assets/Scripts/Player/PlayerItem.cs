@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,26 +52,6 @@ public class PlayerItem : MonoBehaviour
         }
         for (int i = 0; i < _myItemArray.Length; ++i)
         {
-/*            if(_myItemArray[i] != null)
-            {
-                if(_myItemArray[i]._item == item)
-                {
-                    if (_myItemArray[i]._count >= 99)
-                    {
-
-                    }
-                    _myItemArray[i].AddUp(count);
-                    UIManager.Instance._itemListUI.UpdateItemList(i, _myItemArray[i]._count);
-                    return;
-                }
-            }
-            else
-            {
-                _myItemArray[i] = new ItemBase(item, count);
-                UIManager.Instance._itemListUI.AddItemListSprite(i, item._itemSprite, count);
-                return;
-            }*/
-
             if (_myItemArray[i] == null)
             {
                 _myItemArray[i] = new ItemBase(item, count);

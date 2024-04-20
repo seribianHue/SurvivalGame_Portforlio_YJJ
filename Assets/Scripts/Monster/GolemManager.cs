@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,14 +54,8 @@ public class GolemManager : MonoBehaviour, Monster
         if (_isAttacked)
         {
             OnAttack();
-            //transform.LookAt(_targetPlayer.transform);
-            //OnFollowPlayer();
         }
 
-        if (_hp <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
     #endregion
 
@@ -73,6 +65,10 @@ public class GolemManager : MonoBehaviour, Monster
     {
         _targetPlayer = attacker;
         _hp -= dam;
+        if (_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
         SetHPSlider(_hp);
         _isAttacked = true;
     }
@@ -163,7 +159,6 @@ public class GolemManager : MonoBehaviour, Monster
             {
                 OnFollowPlayer();
             }
-            //_isAttackDone = true;
         }
     }
     #endregion
@@ -191,7 +186,6 @@ public class GolemManager : MonoBehaviour, Monster
         if(rock != null)
         {
             rock.transform.SetParent(null);
-            //rock.GetComponent<ThrowRock>().AddForce(_targetPlayer.transform.position);
             rock.GetComponent<Rigidbody>().useGravity = true;
             rock.GetComponent<Rigidbody>().AddForce(Vector3.MoveTowards(
                 rock.transform.position, _targetPlayer.transform.position, 100f) * 100);

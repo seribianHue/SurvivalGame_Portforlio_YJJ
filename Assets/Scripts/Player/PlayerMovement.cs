@@ -1,33 +1,21 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public float _moveSpeed = 5f;
-    [SerializeField] public float _rotSpeed = 2f;
 
     [SerializeField] Transform _camArmTrf;
     [SerializeField] Transform _playerTrf;
 
-    [Header("Head"), SerializeField]
-    GameObject _headGObj;
-
     Animator _anim;
-
-    PlayerManager _playermanager;
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
-        _playermanager = GetComponent<PlayerManager>();
     }
 
     private void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-    }
+    {    }
 
     private void Update()
     {

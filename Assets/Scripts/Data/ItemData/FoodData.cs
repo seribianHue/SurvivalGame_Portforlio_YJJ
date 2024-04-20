@@ -17,7 +17,7 @@ public class FoodData : MonoBehaviour
 
     ItemListTot _itemTot; 
     List<Item> _itemListTot;
-    List<RecipeListTot.Recipe> _recipeListTot;
+    List<Recipe> _recipeListTot;
     public void SetData()
     {
         _data = ReadGoogleSpreadSheet.ReadData(_address, _range, _sheetID);
@@ -39,7 +39,7 @@ public class FoodData : MonoBehaviour
                 Add(new Item(
                     _itemGameData.itemSprites[i], Int32.Parse(itemData[0]), itemData[1], catagory, type, itemData[14], _itemGameData.itemPrefabs[i]));
 
-            _recipeListTot.Add(new RecipeListTot.Recipe(
+            _recipeListTot.Add(new Recipe(
                 _itemListTot[_itemListTot.Count - 1], Int32.Parse(itemData[13]),
                 _itemTot.FindItemByID(Int32.Parse(itemData[7])), Int32.Parse(itemData[8]),
                 _itemTot.FindItemByID(Int32.Parse(itemData[9])), Int32.Parse(itemData[10]),

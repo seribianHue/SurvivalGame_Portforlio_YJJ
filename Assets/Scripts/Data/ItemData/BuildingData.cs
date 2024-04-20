@@ -17,7 +17,7 @@ public class BuildingData : MonoBehaviour
 
     ItemListTot _itemTot;
     List<Item> _itemListTot;
-    List<RecipeListTot.Recipe> _recipeListTot;
+    List<Recipe> _recipeListTot;
 
     public void SetData()
     {
@@ -42,7 +42,7 @@ public class BuildingData : MonoBehaviour
                     _itemGameData.itemSprites[i], Int32.Parse(Data[0]), Data[1], catagory, type, Data[15], _itemGameData.itemPrefabs[i]));
 
             _recipeListTot.
-                Add(new RecipeListTot.Recipe(
+                Add(new Recipe(
                 _itemListTot[_itemListTot.Count - 1], Int32.Parse(Data[14]),
                 _itemTot.FindItemByID(Int32.Parse(Data[8])), Int32.Parse(Data[9]),
                 _itemTot.FindItemByID(Int32.Parse(Data[10])), Int32.Parse(Data[11]),

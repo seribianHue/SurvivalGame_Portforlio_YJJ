@@ -22,13 +22,6 @@ public class AimUI : MonoBehaviour
         StartCoroutine(CRT_SetAimSizeBig());
     }
 
-    public void SetAimSmall()
-    {
-        _bigger = false;
-        StopAllCoroutines();
-        StartCoroutine(CRT_SetAimSizeSmall());
-    }
-
     float _sizeChangeTime = 1f;
     IEnumerator CRT_SetAimSizeBig()
     {
@@ -41,6 +34,13 @@ public class AimUI : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+
+    public void SetAimSmall()
+    {
+        _bigger = false;
+        StopAllCoroutines();
+        StartCoroutine(CRT_SetAimSizeSmall());
     }
 
     IEnumerator CRT_SetAimSizeSmall()

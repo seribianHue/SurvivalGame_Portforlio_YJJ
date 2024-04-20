@@ -32,9 +32,6 @@ public class CraftBTNControll : MonoBehaviour
 
     public void CraftConfirmBTN()
     {
-        //_itemName = EventSystem.current.currentSelectedGameObject.name;
-        //Debug.Log(_itemName);
-
         gameObject.GetComponent<Button>().interactable = false;
 
         bool mat1OK = false;

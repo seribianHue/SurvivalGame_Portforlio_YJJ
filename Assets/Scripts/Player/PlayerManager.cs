@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -43,10 +42,8 @@ public class PlayerManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _isCraft = false;
         _screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
-        _isPause = false;
     }
 
-    bool _isPause = false;
     bool _isGameEnd = false;
     private void Update()
     {
@@ -75,7 +72,6 @@ public class PlayerManager : MonoBehaviour
 
         #region Ray Object Indicate
         Ray ray = Camera.main.ScreenPointToRay(_screenCenter);
-        //Debug.DrawRay()
         Debug.DrawRay(ray.origin, ray.direction * 6, Color.yellow);
 
         if (Physics.Raycast(ray, out _hit, 6, _layer))
@@ -91,8 +87,6 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            //UIManager.Instance.SetAimSmall();
-
             if (_hitObj != null)
             {
                 UIManager.Instance._aimUI.SetAimSmall();
@@ -140,8 +134,7 @@ public class PlayerManager : MonoBehaviour
                     }
                 }   
             }
-        }
-
+        }   
         #endregion
 
         #region Check Building
@@ -180,21 +173,6 @@ public class PlayerManager : MonoBehaviour
 
         }
         #endregion
-
-        /*        if (Input.GetKey(KeyCode.T))
-                {
-                    if(_isPause == false)
-                    {
-                        Time.timeScale = 0f;
-                        _isPause = true;
-                    }
-                    else
-                    {
-                        Time.timeScale = 1.0f;
-                        _isPause = false;
-                    }
-                }*/
-
 
         if ((_playerInfo._hp <= 0) && (_isGameEnd == false))
         {
